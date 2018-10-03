@@ -1,0 +1,38 @@
+! TODO: Not currently in use and in conflict with base16
+
+! 0x10 Shades of Pink & Purple
+*background: #232326 
+*foreground: #b8b8b8
+*color0:  #383838
+*color1:  #ad415e
+*color2:  #617f6b 
+*color3:  #9f7f5e
+*color4:  #6f33a9
+*color5:  #ad339b
+*color8:  #6171a9
+*color6:  #b8b8b8
+*color7:  #474747
+*color9:  #c45874
+*color10: #789682
+*color11: #b69674
+*color12: #864ac0
+*color13: #c44ab2
+*color14: #7888c0
+*color15: #c7c7c7
+
+! Not really in use anymore
+URxvt*termName: rxvt-256color
+URxvt*scrollBar_right: false
+URxvt*scrollBar: false
+URxvt*borderLess: false
+URxvt*inheritPixmap: true
+URxvt*tintColor: white
+URxvt*shading: 20
+URxvt*geometry: 84x24
+URxvt*font: xft:Anonymous Pro:pixelsize=16:antialias=true:hinting=true
+URxvt*boldFont: xft:Fira Code:bold:pixelsize=16:antialias=true:hinting=true
+URxvt.letterSpace: 0
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: firefox
+URxvt.matcher.button: 2
+URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]

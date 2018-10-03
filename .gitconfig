@@ -1,0 +1,18 @@
+[user]
+	name = Robin Eikaas
+	email = robin@eika.as
+[core]
+	pager = less
+	editor = vim
+	excludefile = ~./gitignore
+[diff]
+	tool = vimdiff2
+[push]
+	default = matching
+[difftool]
+	prompt = false
+
+[github]
+	user = eikaas
+[gist]
+	private = yes
