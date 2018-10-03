@@ -18,7 +18,6 @@ RUN pacman --noconfirm -Syu && pacman --noconfirm -S \
 	stow \
 	fakeroot \
 	openssh \
-	toilet \
 	binutils
 
 RUN echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen \

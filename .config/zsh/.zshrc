@@ -17,7 +17,3 @@ source "${ZDOTDIR}/zplug.zsh"
 
 source "${ZDOTDIR}/alias.zsh"
 
-if [[ -f /.dockerenv ]]; then
-  toilet -f smmono12 --gay "You have been contained"
-fi
-
