@@ -17,13 +17,4 @@ setopt NO_CASE_GLOB            #
 setopt EXTENDED_GLOB           #
 setopt COMPLETE_ALIASES        # Autoomplete aliases
 setopt ZLE		       # Enable ZLE
-setopt HIST_IGNORE_SPACE       # Ignore lines starting with space
-setopt EXTENDED_HISTORY        # Save extended history information
-setopt APPEND_HISTORY          # Append to history file
-setopt INC_APPEND_HISTORY      # Append to history continously
-setopt HIST_IGNORE_DUPS        # ignore duplicate lines
-setopt HIST_IGNORE_ALL_DUPS    #
-setopt HIST_REDUCE_BLANKS      #
-setopt HIST_SAVE_NO_DUPS       #
-setopt HIST_EXPIRE_DUPS_FIRST  #
-setopt HIST_FIND_NO_DUPS       #
+
