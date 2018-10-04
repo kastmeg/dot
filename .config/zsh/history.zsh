@@ -19,13 +19,13 @@ setopt INC_APPEND_HISTORY_TIME
 setopt HIST_REDUCE_BLANKS
 
 # Ignore lines starting with space
-HIST_IGNORE_SPACE
+setopt HIST_IGNORE_SPACE
 
 # Ignore subsequent dupes
-HIST_IGNORE_DUPS
+setopt HIST_IGNORE_DUPS
 
 # Dont list duplicates when searching history
-HIST_FIND_NO_DUPS
+setopt HIST_FIND_NO_DUPS
 
 # Timestamp history
 setopt EXTENDED_HISTORY
