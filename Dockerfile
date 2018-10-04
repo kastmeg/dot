@@ -18,6 +18,7 @@ RUN pacman --noconfirm -Syu && pacman --noconfirm -S \
 	stow \
 	fakeroot \
 	openssh \
+	automake \
 	binutils
 
 RUN echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen \
@@ -54,6 +55,12 @@ RUN sudo pacman -Syu --noconfirm
 RUN make install
 
 WORKDIR /home/$user
+
+RUN rm -rf \
+	.bashrc \
+	.bash_profile \
+	.bash_logout \
+	.cache
 
 CMD ["zsh", "-ic", "zplug install"]
 
