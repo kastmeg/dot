@@ -27,4 +27,4 @@ install:
 	curl -sSLfo "${XDG_DATA_HOME}/nvim/site/autoload/plug.vim" --create-dirs \
     		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
 	vim -c "PluginInstall" -c "exit" -c "exit"
-	git clone https://github.com/zplug/zplug ${ZPLUG_HOME}
+	[[ -d ${ZPLUG_HOME} ]] || git clone https://github.com/zplug/zplug ${ZPLUG_HOME}
