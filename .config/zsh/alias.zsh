@@ -1,5 +1,7 @@
 # ~/.zsh/alias.zsh
 
+alias kerr="journalctl -k -b -p 3"
+
 alias tc="tc -color -pretty"
 alias ip="ip -color -pretty"
 alias routes="ip route show"

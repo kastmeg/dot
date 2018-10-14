@@ -29,8 +29,8 @@ sacrollbar = off
 #font = Iosevka 10
 #font = Biwidth 12
 #font = DEC Terminal 12
-font = Source Code Pro 12
-#font = Misc Tamsyn 12
+#font = Source Code Pro 12
+font = Misc Tamsyn 12
 
 [colors]
 # base16-shell deals with the terminal colors, but the background
