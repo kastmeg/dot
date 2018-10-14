@@ -1,0 +1,59 @@
+global:
+    debug: False
+    refresh_interval: 1
+blocks:
+    - type: disk
+      label: "fs: "
+      filesystems:
+          /: 90
+          /home: 90
+          /var: 90
+          /boot: 90
+
+    - type: load
+      label: "load: "
+      crit_load: 2
+
+    # The memory block displays available memory.
+    - type: memory
+      label: "mem: "
+      crit_mem: 1
+
+    - type: temperature
+      label: "temp: "
+      # cpu_temp_path is the path to the "hwmon" directory of the CPU
+      # temperature info.
+      cpu_temp_path: /sys/devices/platform/coretemp.0/hwmon
+      crit_temp: 50
+
+    - type: interface
+      label: "wg0: "
+      interface_name: wg0
+      interface_format: "{{.Status}}"
+      color: "#9ada7a"
+
+    - type: interface
+      label: "eth: "
+      interface_name: enp3s0
+      interface_format: "{{.Status}}"
+      color: "#9ada7a"
+
+      #- type: battery
+      #label: "bat: "
+      #battery_number: 0
+      #crit_battery: 20
+
+    - type: volume
+      update_interval: 60
+      label: "vol: "
+      update_signal: 1
+      mixer_device: default
+      channel: Master
+
+    - type: command
+      label: "ip: "
+      command: 'curl ip.ccnp.no'
+
+    - type: time
+      update_interval: 0.5
+      time_format: 15:04:05

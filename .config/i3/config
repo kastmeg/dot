@@ -9,7 +9,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+r exec dmenu_run
+bindsym $mod+r exec dmenu_run -l 32
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
@@ -32,10 +32,10 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
-# change container layout 
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
+
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -62,6 +62,17 @@ mode "resize" {
 }
 
 bar {
-        status_command i3status
+        status_command goblocks
 }
+
+bindsym $mod+shift+x exec i3lock
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPlay exec playerctl pause
+bindsym XF86AudioPlay exec playerctl next
+bindsym XF86AudioPlay exec playerctl previous
 
