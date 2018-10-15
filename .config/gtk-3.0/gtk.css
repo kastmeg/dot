@@ -11,16 +11,11 @@ headerbar.default-decoration button titlebutton {
 }
 
 .termite {
-	padding-top: 4px;
-	padding-right: 6px;
-	padding-left: 6px;
-	padding-bottom: 4px
-	#color: transparent;
-	#background-image: linear-gradient(0deg, #2f0f2f 20%, #1f1f1f 80%);
-	#background-color: red;
-	#border-top-color: rgb(128,57,0);
-	#border-left-color: rgba(10%,20%,30%,0.5);
-	#border-right-color: #ff00cc;
-	#border-bottom-color: #ffff0000cccc;
+	/* 
+	 * This color should match the background color set
+	 * in ~/.base16_theme
+	 */
+	background-color: #2e3440;
+	padding: 12px;
 }
 

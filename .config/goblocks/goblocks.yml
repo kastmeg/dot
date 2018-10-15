@@ -1,59 +1,66 @@
 global:
     debug: False
     refresh_interval: 1
+
 blocks:
     - type: disk
-      label: "fs: "
+      label: "  "
+      color: "#88C0D0" # Base 08 - Red
       filesystems:
           /: 90
           /home: 90
           /var: 90
           /boot: 90
-
     - type: load
-      label: "load: "
+      label: "  "
+      color: "#EBCB8B" # Base 0D - Blue
       crit_load: 2
-
-    # The memory block displays available memory.
     - type: memory
-      label: "mem: "
+      label: "  "
+      color: "#A3BE8C" # Base 0E - Magenta
       crit_mem: 1
 
+    - type: interface
+      label: "  "
+      interface_name: wg0
+      interface_format: "{{.Status}}"
+      color: "#A3BE8C"
+
     - type: temperature
-      label: "temp: "
-      # cpu_temp_path is the path to the "hwmon" directory of the CPU
-      # temperature info.
+      label: "  "
       cpu_temp_path: /sys/devices/platform/coretemp.0/hwmon
+      color: "#D08770" # Base 0C - Cyan
       crit_temp: 50
 
     - type: interface
-      label: "wg0: "
-      interface_name: wg0
-      interface_format: "{{.Status}}"
-      color: "#9ada7a"
-
-    - type: interface
-      label: "eth: "
+      label: "  "
       interface_name: enp3s0
       interface_format: "{{.Status}}"
-      color: "#9ada7a"
-
+      color: "#A3BE8C"
       #- type: battery
       #label: "bat: "
       #battery_number: 0
       #crit_battery: 20
-
     - type: volume
       update_interval: 60
-      label: "vol: "
+      label: " "
       update_signal: 1
+      color: "#A3BE8C"
       mixer_device: default
       channel: Master
-
     - type: command
-      label: "ip: "
+      label: " "
+      color: "#D08770"
       command: 'curl ip.ccnp.no'
 
     - type: time
+      label: "  "
       update_interval: 0.5
+      color: "#BF616A"
       time_format: 15:04:05
+
+    - type: time
+      label: "  "
+      update_interval: 60
+      time_format: 02-01-2006
+      color: "#A3BE8C" # Base 0E - Magenta

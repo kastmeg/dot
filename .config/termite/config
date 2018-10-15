@@ -1,3 +1,5 @@
+# vim: ft=dosini cms=#%s
+
 [options]
 allow_bold = false
 audible_bell = false
@@ -14,39 +16,19 @@ scroll_on_keystroke = true
 scrollback_lines = 10000
 sacrollbar = off
 
-#font = Anonymous Pro 10
-#font = Envy Code R 10
-#font = Fira Mono 12
-#font = Source Code Pro 12
-#font = Bitstream Terminal 12 (nope)
-#font = Hasklig 10
-#font = Iosevka 12
-#font = Iosevka Extralight 12
-#font = ProggyCleanCP
-#font = ProggyCleanTTSZBP 12
-#font = ProFont Regular 12
-#font = Dina 10
-#font = Iosevka 10
-#font = Biwidth 12
-#font = DEC Terminal 12
-#font = Source Code Pro 12
-font = Misc Tamsyn 12
+# * Anonymous Pro 10
+# * Envy Code R 10
+# * Fira Mono 12
+# * Hasklig 10
+# * ProggyCleanTTSZBP 12
+# * ProFont Regular 12
+# * DEC Terminal 12
+#font = Misc Tamsyn 10
+font = DEC Terminal 10
 
 [colors]
-# base16-shell deals with the terminal colors, but the background
-# color defined here becomes visible in the padded area surrounding 
-# the terminal. The background needs to match whatever base16
-# colorscheme is in use or the padded area becomes a fat border instead
 background = #2d2d2d
 #cursor = #b8b8b8
 #cursor_foreground = #6171a9
 #active_foreground = #ad339b
-
-[hints]
-#padding = 10
-#border = #0000ff
-#border_width = 0.5
-#roundness = 5.0
-
-# vim: ft=dosini cms=#%s
 

@@ -1,32 +1,39 @@
-# Mod4 is the Win/Cmd/Options button
+# vim: ft=i3config
 set $mod Mod4
 
-# Window title font
-font pango:Source Code Pro 12
-
-# Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
+smart_gaps on
+gaps inner 25
+gaps outer 15
+
+hide_edge_borders both
+
+font pango:DEC Terminal 10
+for_window [class="^.*"] border pixel 0
+for_window [class="Firefox"] move container to workspace 1
+for_window [class="Pinentry"] floating enable
+
+# ----------------------------------------------------------------------------------
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+r exec dmenu_run -l 32
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+q kill
+
+# vim-like HJKL-movement
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+backslash split h
 bindsym $mod+minus split v
-
-bindsym $mod+Shift+q kill
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Shift+space floating toggle
@@ -34,45 +41,70 @@ bindsym $mod+space focus mode_toggle
 
 bindsym $mod+e layout toggle split
 
-#bindsym $mod+s layout stacking
-#bindsym $mod+w layout tabbed
-
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
 
-# resize window 
-mode "resize" {
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
+# Pre-blurred background image: convert -blur 0x8 ~/.config/i3/bg.png ~/.config/i3/bg-blur.png
+bindsym $mod+shift+x exec i3lock -i ~/.config/i3/bg-blur.png
 
-bar {
-        status_command goblocks
-}
-
-bindsym $mod+shift+x exec i3lock
-
+# TODO: Doesn't work
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
-
 bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPlay exec playerctl pause
-bindsym XF86AudioPlay exec playerctl next
-bindsym XF86AudioPlay exec playerctl previous
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+mode "resize" {
+        bindsym h resize shrink width 5 px
+        bindsym j resize grow height 5 px
+        bindsym k resize shrink height 5 px
+        bindsym l resize grow width 5 px
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Shift+w mode "resize"
+
+# ----------------------------------------------------------------------------------
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+
+#workspace 1 output eDP1
+#workspace 2 output HDMI2
+#workspace 3 output HDMI1
+
+# ----------------------------------------------------------------------------------
+
+bar {
+        tray_output primary
+        status_command goblocks
+        # what does this do?
+        mode dock
+        workspace_buttons yes
+        # What does this do?
+        strip_workspace_numbers yes
+        colors {
+                background #2e3440
+                statusline #e5e9f0
+                separator #5e81ac
+        }
+}
+
+# ----------------------------------------------------------------------------------
+
 
