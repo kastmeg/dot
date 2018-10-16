@@ -15,7 +15,7 @@ for_window [class="Firefox"] move container to workspace 1
 for_window [class="Pinentry"] floating enable
 
 # ----------------------------------------------------------------------------------
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 bindsym $mod+r exec dmenu_run -l 32
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
@@ -99,9 +99,9 @@ bar {
         # What does this do?
         strip_workspace_numbers yes
         colors {
-                background #2e3440
-                statusline #e5e9f0
-                separator #5e81ac
+                background #292D3E
+                statusline #959DCB
+                separator #82AAFF
         }
 }
 

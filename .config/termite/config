@@ -27,7 +27,7 @@ sacrollbar = off
 font = DEC Terminal 10
 
 [colors]
-background = #2d2d2d
+background = #292D3E
 #cursor = #b8b8b8
 #cursor_foreground = #6171a9
 #active_foreground = #ad339b
