@@ -1,3 +1,20 @@
+# bluetooth   
+# USB 	
+# folder 
+# mic   
+# servers 
+# toggle   
+# Battery: 	    	 	
+# Hash   
+# Terminal 
+# lightning 
+# disconnect 
+# volume 			
+# cogs    
+# brightness / contrast  
+# mail 	
+#
+#  
 global:
     debug: False
     refresh_interval: 1
@@ -11,45 +28,63 @@ blocks:
           /home: 90
           /var: 90
           /boot: 90
+
     - type: load
-      label: "  "
+      label: "  "
       color: "#C3E88D" # Green
       crit_load: 2
+
     - type: memory
       label: "  "
       color: "#89DDFF" # Cyan
       crit_mem: 1
 
     - type: interface
-      label: "  "
       interface_name: wg0
+      update_interval: 5
       interface_format: "{{.Status}}"
       color: "#C3E88D" # Green
+
+    - type: command
+      label: "  "
+      color: "#E8C38D"
+      update_interval: 60
+      command: "/home/robin/bin/wgstatus --single-line"
 
     - type: temperature
       label: "  "
       cpu_temp_path: /sys/devices/platform/coretemp.0/hwmon
-      crit_temp: 50
+      crit_temp: 68
       color: "#C792EA" # Magenta
 
+      #- type: interface
+      #label: "  "
+      #interface_name: ens2
+      #interface_format: "{{.Status}}"
+      #color: "#FFCB6B" # Yellow
+
     - type: interface
-      label: "  "
-      interface_name: enp3s0
+      label: "  "
+      interface_name: wlp3s0
       interface_format: "{{.Status}}"
+      color: "#89DDFF" # Cyan
+
+    - type: battery
+      label: "   "
+      battery_number: 0
+      crit_battery: 20
       color: "#FFCB6B" # Yellow
-  # - type: battery
-      #label: "bat: "
-      #battery_number: 0
-      #crit_battery: 20
+
     - type: volume
       update_interval: 60
-      label: " "
+      label: "  "
       update_signal: 1
       color: "#C792EA" # Magenta
       mixer_device: default
       channel: Master
+
     - type: command
-      label: " "
+      label: "  "
       color: "#89DDFF"
       command: 'curl ip.ccnp.no'
 
@@ -60,7 +95,7 @@ blocks:
       time_format: 15:04:05
 
     - type: time
-      label: "  "
+      label: ""
       update_interval: 60
       time_format: 02-01-2006
       color: "#FFCB6B" # Yellow
