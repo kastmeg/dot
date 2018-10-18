@@ -52,8 +52,6 @@ bindsym $mod+Shift+c kill
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
 bindsym $mod+shift+x exec i3lock -i ~/.config/i3/bg-blur.png
-bindsym --whole-window button9 move left
-bindsym --whole-window button8 move right
 
 # TODO: Doesn't work
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5
