@@ -12,11 +12,19 @@ if [[ -d "/etc/X11/xinit/xinitrc.d" ]]; then
   unset f
 fi
 
-setxkbmap -layout us -variant mac -option 'ctrl:nocaps' -option 'apple:alupckeys' 
-
+setxkbmap -layout us -variant mac -option 'ctrl:nocaps' -option 'apple:alupckeys'
+dbus-daemon --session --fork
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets)
 
-feh --bg-fill ~/.config/i3/bg.jpg &
+monSha="$(xrandr | egrep "\sconnected" | sort | awk '{print $1}' | sha1sum | awk '{print $1}')"
+if [[  "${monSha}" == "312aa0f7210f834848c9ce9518fc02cb97e4d576" ]]; then
+  xrandr --output VIRTUAL1 --off \
+         --output eDP1 --mode 2560x1600 --pos 4000x608 --rotate normal \
+         --output DP1 --mode 2560x1440 --pos 2560x0 --rotate left \
+         --output HDMI2 --mode 2560x1440 --pos 0x512 --rotate normal --primary \
+         --output HDMI1 --off \
+         --output DP2 --off
+fi
 
 exec i3
 
