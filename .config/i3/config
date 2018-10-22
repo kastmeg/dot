@@ -1,25 +1,24 @@
 # vim: ft=i3config
 set $mod Mod4
 
+# -------------------------------------------
 floating_modifier $mod
-
 smart_gaps on
 gaps inner 20
-
 hide_edge_borders both
 workspace_auto_back_and_forth yes
-
 font pango:DEC Terminal 10
+
+# -------------------------------------------
 for_window [class="^.*"] border pixel 0
 for_window [class="Pinentry"] floating enable
 for_window [class="SPEEDREADER"] floating enable
-
-assign [class="^chromium$"] → web
-assign [class="^firefox$"] → web
-assign [class="^irssi$"] → im
-assign [class="^slack$"] → im
-assign [class="^zoom$"] → im
-assign [class="^thunderbird$"] → mail
+assign [class="chromium"] → number "1:web"
+assign [class="firefox"]  → number "1:web:"
+assign [class="irssi"]  → number "4:im"
+assign [class="slack"]  → number "4:im"
+assign [class="zoom"]  → number "4:im"
+assign [class="hipchat4"] → number "4:im"
 
 # -------------------------------------------
 set $sceenshot '$HOME/.screenshots/%Y-%m-%d-%H-%M-%S-$w-x-$h.png'
@@ -41,6 +40,7 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+
 # -------------------------------------------
 bindsym $mod+backslash split h
 bindsym $mod+minus split v
@@ -53,20 +53,17 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
 bindsym $mod+shift+x exec i3lock -i ~/.config/i3/bg-blur.png
 
-# TODO: Doesn't work
+# -------------------------------------------
+# TODO: Media keys no work
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
-
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-
-# Monitor Backlight
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-
 # Keyboard Backlight
 # TODO: /sys/class/leds/smc::kbd_backlight/brightness
 # bindsym XF86KbdBrightnessUp 
@@ -103,6 +100,7 @@ bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6
 
+# -------------------------------------------
 workspace $ws1 output HDMI2
 workspace $ws2 output HDMI2
 workspace $ws3 output HDMI2
@@ -131,5 +129,4 @@ bar {
 # -------------------------------------------
 
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
 exec feh --bg-fill ~/.config/i3/bg.jpg
