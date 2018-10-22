@@ -14,4 +14,9 @@ cdParentDir() {
 }
 zle -N cdParentDir
 
+sudo-inject() {
+  zle beginning-of-line
+  zle -U "sudo "
+}
+zle -N sudo-inject
 

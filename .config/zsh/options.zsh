@@ -17,4 +17,16 @@ setopt NO_CASE_GLOB            #
 setopt EXTENDED_GLOB           #
 setopt COMPLETE_ALIASES        # Autoomplete aliases
 setopt ZLE		       # Enable ZLE
+setopt VI
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+setopt HIST_NO_STORE
+setopt EXTENDED_HISTORY
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
 
