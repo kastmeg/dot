@@ -56,7 +56,7 @@ genpassphrase() {
   _pass_phrase="\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
   unset _pass_phrase
 }
-=======
+
 sudo-inject() {
   zle beginning-of-line
   zle -U "sudo "
