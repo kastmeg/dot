@@ -19,3 +19,6 @@ export EDITOR=vim
 export SYSTEMD_EDITOR=vim
 export PAGER=less
 export TERMINAL=termite
+
+export PRINTER=HP_LaserJet_400_M401dn
+export LPDEST=HP_LaserJet_400_M401dn

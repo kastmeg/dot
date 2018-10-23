@@ -22,7 +22,10 @@ alias mv='mv -v'
 alias rm='rm -v'
 alias figlet='figlet -w 300 -f univers'
 
-alias genpw="base64 <(cat /dev/urandom | head -c 12)"
+alias genpw="base64 <(cat /dev/urandom | head -c 16)"
+alias genpw32="base64 <(cat /dev/urandom | head -c 32)"
+
+alias clip="xclip -i -sel clipboard"
 
 alias ls="exa --git --color-scale -mghrs size"
 alias lst="exa --group-directories-first --git --tree --color-scale -mghrs size"
