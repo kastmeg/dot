@@ -14,7 +14,6 @@ cdParentDir() {
 }
 zle -N cdParentDir
 
-<<<<<<< HEAD
 genpassphrase() {
   local _password_store _pp_name _pass_phrase _store_pp_abs_path
   _key_id="robin@eika.as"
@@ -63,5 +62,3 @@ sudo-inject() {
   zle -U "sudo "
 }
 zle -N sudo-inject
->>>>>>> d55132c61a17b28ac4d30ba3e6f78aabec024766
-
