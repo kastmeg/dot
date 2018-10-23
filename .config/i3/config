@@ -13,12 +13,12 @@ font pango:DEC Terminal 10
 for_window [class="^.*"] border pixel 0
 for_window [class="Pinentry"] floating enable
 for_window [class="SPEEDREADER"] floating enable
-assign [class="chromium"] → number "1:web"
-assign [class="firefox"]  → number "1:web:"
-assign [class="irssi"]  → number "4:im"
-assign [class="slack"]  → number "4:im"
-assign [class="zoom"]  → number "4:im"
-assign [class="hipchat4"] → number "4:im"
+assign [class="chromium"] →  1
+assign [class="firefox"]  →  1
+assign [class="irssi"]  →  5
+assign [class="slack"]  →  5
+assign [class="zoom"]  →   5
+assign [class="hipchat4"] →  5
 
 # -------------------------------------------
 set $sceenshot '$HOME/.screenshots/%Y-%m-%d-%H-%M-%S-$w-x-$h.png'
@@ -81,32 +81,44 @@ mode "resize" {
 bindsym $mod+Shift+w mode "resize"
 
 # -------------------------------------------
-set $ws1 "1:web"
-set $ws2 "2:term"
-set $ws3 "3:dev"
-set $ws4 "4:im"
-set $ws5 "5:misc"
-set $ws6 "6:mail"
+set $ws1 "1:I"
+set $ws2 "2:II"
+set $ws3 "3:III"
+set $ws4 "4:IV"
+
+set $ws5 "5:V"
+set $ws6 "6:VI"
+set $ws7 "7:VII"
+set $ws8 "8:VIII"
+
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
 
 # -------------------------------------------
 workspace $ws1 output HDMI2
 workspace $ws2 output HDMI2
 workspace $ws3 output HDMI2
-workspace $ws4 output DP1
+workspace $ws4 output HDMI2
+
 workspace $ws5 output DP1
-workspace $ws6 output eDP1
+workspace $ws6 output DP1
+workspace $ws7 output DP1
+workspace $ws8 output DP1
 
 # -------------------------------------------
 bar {

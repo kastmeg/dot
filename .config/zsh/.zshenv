@@ -11,7 +11,7 @@ export ZDATADIR="${XDG_DATA_HOME}/zsh"
 export ZPLUG_HOME="${XDG_DATA_HOME}/zplug"
 export _Z_DATA="${XDG_DATA_HOME}/z"
 
-export GOPATH="${HOME}/eikxyz/go"
+export GOPATH="${HOME}/go"
 export PATH="${HOME}/bin:${GOPATH}/bin:${PATH}"
 
 export BROWSER=firefox
