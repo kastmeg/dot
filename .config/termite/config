@@ -20,11 +20,11 @@ sacrollbar = off
 # * Envy Code R 10
 # * Fira Mono 12
 # * Hasklig 10
-# * ProggyCleanTTSZBP 12
 # * ProFont Regular 12
 # * DEC Terminal 12
-#font = Misc Tamsyn 10
-font = DEC Terminal 10
+# * Misc Tamsyn 12
+# * DEC Terminal 10
+font = ProggyCleanTTSZBP 12
 
 [colors]
 background = #292D3E
