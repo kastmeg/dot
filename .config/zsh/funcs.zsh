@@ -63,4 +63,3 @@ sudo-inject() {
 }
 zle -N sudo-inject
 
-

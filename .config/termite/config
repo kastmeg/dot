@@ -24,7 +24,8 @@ sacrollbar = off
 # * DEC Terminal 12
 # * Misc Tamsyn 12
 # * DEC Terminal 10
-font = ProggyCleanTTSZBP 12
+#font = ProggyCleanTTSZBP 12
+font = DEC Terminal 10
 
 [colors]
 background = #292D3E
