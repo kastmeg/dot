@@ -23,8 +23,12 @@ run: image
 
 # Install the dotfiles to the current directory's parent directory
 install:
-	stow -vS --ignore="(README.md|Makefile|Dockerfile)" .
+	stow -vS --target=${HOME} --ignore="(README.md|Makefile|Dockerfile)" .
 	curl -sSLfo "${XDG_DATA_HOME}/nvim/site/autoload/plug.vim" --create-dirs \
     		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
 	vim -c "PluginInstall" -c "exit" -c "exit"
 	[[ -d ${ZPLUG_HOME} ]] || git clone https://github.com/zplug/zplug ${ZPLUG_HOME}
+
+
+uninstall:
+	stow --target=${HOME} -v -D .
