@@ -11,8 +11,9 @@ export ZDATADIR="${XDG_DATA_HOME}/zsh"
 export ZPLUG_HOME="${XDG_DATA_HOME}/zplug"
 export _Z_DATA="${XDG_DATA_HOME}/z"
 
-export GOPATH="${HOME}/go"
-export PATH="${HOME}/bin:${GOPATH}/bin:${PATH}"
+export CLOUD_SYNC="${HOME}/sync"
+export GOPATH="${CLOUD_SYNC}"
+export PATH="${HOME}/bin:${CLOUD_SYNC}/bin:${PATH}"
 
 export BROWSER=firefox
 export EDITOR=vim
