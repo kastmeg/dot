@@ -1,6 +1,7 @@
 # ~/.zsh/alias.zsh
 
 alias kerr="journalctl -k -b -p 3"
+alias wifi_list="nmcli device wifi rescan; nmcli -p -f all device wifi list"
 
 alias tree="tree -dC -L 3"
 alias tc="tc -color -pretty"
@@ -23,7 +24,7 @@ alias mv='mv -v'
 alias rm='rm -v'
 alias figlet='figlet -w 300 -f univers'
 
-alias genpw="base64 <(cat /dev/urandom | head -c 16)"
+alias genpw="base64 <(cat /dev/urandom | head -c 16) | tr -d '=' | tr -d '/'"
 alias genpw32="base64 <(cat /dev/urandom | head -c 32)"
 
 alias clip="xclip -i -sel clipboard"
