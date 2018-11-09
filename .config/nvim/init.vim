@@ -1,6 +1,8 @@
 "~~~~~~~~~~~~~~~~~~~~~~~
 " Plugins:
 "~~~~~~~~~~~~~~~~~~~~~~~
+" Builds the markdown composer rust plugin renders markdown in 
+" a browser window async. Requires a rust compiler
 call plug#begin('~/.local/share/nvim/plugged')
 " General
 Plug 'neomake/neomake'          " Async linting framework
@@ -30,17 +32,22 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'mboughaba/i3config.vim'
 
+" Markdown
+Plug 'euclio/vim-markdown-compose', {'do': function('BuildComposer') }
+Plug 'junegunn/goyo.vim'
+
 call plug#end()
 
 let g:deoplete#enable_at_startup = 1
 "~~~~~~~~~~~~~~~~~~~~~~~
 " General Settings:
 "~~~~~~~~~~~~~~~~~~~~~~~
+" Set spell check language
+"
+set spell spelllang=en_us
 " Disable error bells
+"
 set noerrorbells
-
-" Disable .swp file creation
-set noswapfile
 
 " Don't linewrap
 set nowrap
@@ -188,6 +195,7 @@ autocmd BufNewFile,BufRead *.html setlocal noexpandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.vim setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.yml setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.sh setlocal expandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us complete+=kspell tabstop=4 shiftwidth=4
 
 " Set filetype to nginx for .conf files in the right directories
 autocmd BufRead,BufNewFile
@@ -208,7 +216,7 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "gofmt"
 let g:go_metalinter_autosave = 1
 
 " Nerdtree:
@@ -278,6 +286,7 @@ let g:airline#extensions#tabline#enabled = 1
 let NVIM_TUI_ENABLE_TRUE_COLOR=1
 let NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
+
 " vimdiff
 if &diff 
   highlight LineNr ctermfg=238 ctermbg=black
@@ -285,3 +294,4 @@ if &diff
   highlight cursorline ctermfg=95 ctermbg=NONE
   set cursorline
 endif
+

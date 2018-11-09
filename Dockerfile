@@ -19,7 +19,9 @@ RUN pacman --noconfirm -Syu && pacman --noconfirm -S \
 	fakeroot \
 	openssh \
 	automake \
-	binutils
+	binutils \
+	cargo \
+	tig
 
 RUN echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen \
 	&& locale-gen \
