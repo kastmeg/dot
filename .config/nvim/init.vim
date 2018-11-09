@@ -37,10 +37,8 @@ let g:deoplete#enable_at_startup = 1
 " General Settings:
 "~~~~~~~~~~~~~~~~~~~~~~~
 " Disable error bells
+"
 set noerrorbells
-
-" Disable .swp file creation
-set noswapfile
 
 " Don't linewrap
 set nowrap
@@ -188,6 +186,7 @@ autocmd BufNewFile,BufRead *.html setlocal noexpandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.vim setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.yml setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.sh setlocal expandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us complete+=kspell tabstop=4 shiftwidth=4
 
 " Set filetype to nginx for .conf files in the right directories
 autocmd BufRead,BufNewFile
@@ -278,6 +277,7 @@ let g:airline#extensions#tabline#enabled = 1
 let NVIM_TUI_ENABLE_TRUE_COLOR=1
 let NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
+
 " vimdiff
 if &diff 
   highlight LineNr ctermfg=238 ctermbg=black
@@ -285,3 +285,4 @@ if &diff
   highlight cursorline ctermfg=95 ctermbg=NONE
   set cursorline
 endif
+
