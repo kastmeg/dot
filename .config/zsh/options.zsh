@@ -1,6 +1,3 @@
-#setopt AUTO_CD                 # implicate cd for non-commands
-setopt CD_ABLE_VARS            # read vars in cd
-#setopt CORRECT                 # correct spelling
 setopt COMPLETE_IN_WORD        # complete commands anywhere in the word
 setopt NOTIFY                  # Notify when jobs finish
 setopt C_BASES                 # 0xFF

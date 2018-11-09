@@ -1,6 +1,8 @@
 "~~~~~~~~~~~~~~~~~~~~~~~
 " Plugins:
 "~~~~~~~~~~~~~~~~~~~~~~~
+" Builds the markdown composer rust plugin renders markdown in 
+" a browser window async. Requires a rust compiler
 call plug#begin('~/.local/share/nvim/plugged')
 " General
 Plug 'neomake/neomake'          " Async linting framework
@@ -30,12 +32,19 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'mboughaba/i3config.vim'
 
+" Markdown
+Plug 'euclio/vim-markdown-compose', {'do': function('BuildComposer') }
+Plug 'junegunn/goyo.vim'
+
 call plug#end()
 
 let g:deoplete#enable_at_startup = 1
 "~~~~~~~~~~~~~~~~~~~~~~~
 " General Settings:
 "~~~~~~~~~~~~~~~~~~~~~~~
+" Set spell check language
+"
+set spell spelllang=en_us
 " Disable error bells
 "
 set noerrorbells
@@ -207,7 +216,7 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_type_info = 1
 let g:go_addtags_transform = "snakecase"
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "gofmt"
 let g:go_metalinter_autosave = 1
 
 " Nerdtree:
