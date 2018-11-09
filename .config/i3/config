@@ -13,12 +13,6 @@ font pango:DEC Terminal 10
 for_window [class="^.*"] border pixel 0
 for_window [class="Pinentry"] floating enable
 for_window [class="SPEEDREADER"] floating enable
-assign [class="chromium"] →  1
-assign [class="firefox"]  →  1
-assign [class="irssi"]  →  5
-assign [class="slack"]  →  5
-assign [class="zoom"]  →   5
-assign [class="hipchat4"] →  5
 
 # -------------------------------------------
 set $sceenshot '$HOME/.screenshots/%Y-%m-%d-%H-%M-%S-$w-x-$h.png'
