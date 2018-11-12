@@ -6,6 +6,7 @@ LATEST    := ${NAME}:latest
 IMG_USR   := eikxyz
 
 ZPLUG_HOME := ${HOME}/.local/share/zplug
+XDG_DATA_HOME := ${HOME}/.local/share/zplug
 
 .PHONY: image run
 
@@ -20,6 +21,28 @@ image:
 # Run the dotfiles in a docker container
 run: image
 	docker run --rm -it --hostname ${HOSTNAME} ${IMAGE}
+
+deps:
+	sudo pacman -Sy git \
+		zsh \
+		neovim \
+		python-neovim \
+		python2-neovim \
+		tmux \
+		exa \
+		neofetch \
+		man \
+		make \
+		sudo \
+		tree \
+		stow \
+		fakeroot \
+		openssh \
+		automake \
+		binutils \
+		cargo \
+		tig
+
 
 # Install the dotfiles to the current directory's parent directory
 install:

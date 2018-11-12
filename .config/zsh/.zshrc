@@ -1,4 +1,3 @@
-source "${ZDOTDIR}/.zshenv"
 autoload -Uz compinit promptinit zcalc zsh-mime-setup
 compinit
 promptinit
