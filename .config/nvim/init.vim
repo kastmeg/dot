@@ -1,94 +1,64 @@
-"~~~~~~~~~~~~~~~~~~~~~~~
-" Plugins:
-"~~~~~~~~~~~~~~~~~~~~~~~
-" Builds the markdown composer rust plugin renders markdown in 
-" a browser window async. Requires a rust compiler
+function! BuildComposer(info)
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      !cargo build --release
+    else
+      !cargo build --release --no-default-features --features json-rpc
+    endif
+  endif
+endfunction
+function! s:tig_status()
+  cd `driller --scm-root %`
+  !tig status
+endfunction
+map <C-G> :TigStatus<CR><CR>
+command! TigStatus call s:tig_status()
+
 call plug#begin('~/.local/share/nvim/plugged')
-" General
 Plug 'neomake/neomake'          " Async linting framework
 Plug 'scrooloose/nerdcommenter' " leader+cc, leader+cy
 Plug 'scrooloose/nerdtree' 
-
-" Git
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
-
-" Golang
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'mdempsky/gocode'        ", { 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
 Plug 'godoctor/godoctor.vim'  " :Rename, :Refactor
 Plug 'jodosha/vim-godebug'    " Add debugging break-points in vim
-
-" Misc
 Plug 'pearofducks/ansible-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fidian/hexmode'           " :hexmode
 Plug 'tpope/vim-sleuth'
-
-" Aesthetics
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-startify'
 Plug 'mboughaba/i3config.vim'
-
-" Markdown
-Plug 'euclio/vim-markdown-compose', {'do': function('BuildComposer') }
 Plug 'junegunn/goyo.vim'
-
+Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 call plug#end()
 
 let g:deoplete#enable_at_startup = 1
 "~~~~~~~~~~~~~~~~~~~~~~~
 " General Settings:
 "~~~~~~~~~~~~~~~~~~~~~~~
-" Set spell check language
-"
 set spell spelllang=en_us
-" Disable error bells
-"
 set noerrorbells
-
-" Don't linewrap
 set nowrap
-
-" Display margin line number
 set number
-
-" Enable and configure wildmenu
 set wildmenu
 set wildmode=list:longest
 set completeopt=longest,menuone
-
-" Enable mouse support
 set mouse=a
-
-" Start scrolling before the cursor reaches the top or bottom of the buffer
 set scrolloff=8
-
-" Set some sane defaults
 set fileformats=unix,dos,mac
 set encoding=utf-8
-
-" Yanked text ends up in the system clipboard (On Mac OS at least)
 set clipboard^=unnamed
 set clipboard^=unnamedplus
-
-" Visually identify the matching paren or bracket
 set showmatch
-
-" Ignore case when searching unless mixed case is explicitly used 
-" in the search term
 set ignorecase
 set smartcase
-
-" Indent new lines based on the surrounding lines indentation
 set smartindent
-
-" Don't redraw during macros, registers and other untyped commands
 set lazyredraw
-
-" automatically write files on :make, :GoBuild, etc
 set autowrite
 
 "~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,7 +165,6 @@ autocmd BufNewFile,BufRead *.html setlocal noexpandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.vim setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.yml setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.sh setlocal expandtab tabstop=4 shiftwidth=4
-autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us complete+=kspell tabstop=4 shiftwidth=4
 
 " Set filetype to nginx for .conf files in the right directories
 autocmd BufRead,BufNewFile
@@ -286,6 +255,15 @@ let g:airline#extensions#tabline#enabled = 1
 let NVIM_TUI_ENABLE_TRUE_COLOR=1
 let NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
+" Spell Checking
+highlight clear SpellBad cterm
+highlight SpellBad ctermbg=NONE ctermfg=132 cterm=underline
+setlocal spelllang=en_us
+" ^N and ^P to autocomplete
+autocmd FileType gitcommit setlocal spell complete+=kspell
+autocmd BufNewFile,BufRead *.md setlocal spell complete+=kspell
+autocmd BufNewFile,BufRead *.txt setlocal spell complete+=kspell
+autocmd BufNewFile,BufRead *.markdown setlocal spell complete+=kspell
 
 " vimdiff
 if &diff 
