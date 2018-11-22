@@ -3,7 +3,7 @@
 alias kerr="journalctl -k -b -p 3"
 alias wifi_list="nmcli device wifi rescan; nmcli -p -f all device wifi list"
 
-alias tree="tree -dC -L 3"
+alias tree="tree -C -L 3"
 alias tc="tc -color -pretty"
 alias ip="ip -color -pretty"
 alias routes="ip route show"

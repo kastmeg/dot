@@ -13,11 +13,5 @@ source "${ZDOTDIR}/completion.zsh"
 source "${ZDOTDIR}/zplug.zsh"
 source "${ZDOTDIR}/alias.zsh"
 
-HISTFILE=~/.history
-SAVEHIST=15000
-HISTSIZE=15000
-export HISTFILE HISTSIZE SAVEHIST
-
-
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /home/robin/xyz/go/bin/gocomplete go

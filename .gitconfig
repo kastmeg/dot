@@ -1,6 +1,7 @@
 [user]
 	name = Robin Eikaas
 	email = robin@eika.as
+	signingkey = 0x061EDBCFD08647ED
 [core]
 	pager = less
 	editor = vim
@@ -16,3 +17,5 @@
 	user = eikaas
 [gist]
 	private = yes
+[commit]
+	gpgsign = true
