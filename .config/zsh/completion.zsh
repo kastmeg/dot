@@ -5,4 +5,4 @@ zstyle ':completion:*' cache-path ${ZDATADIR}/cache/
 zstyle ':completion:*:*:*:*:processes' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
 
-
+eval $(pandoc --bash-completion)
