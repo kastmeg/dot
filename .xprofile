@@ -1,0 +1,9 @@
+# This file is sourced by LightDM
+ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+ZDATADIR="${XDG_DATA_HOME}/zsh"
+
+XDG_CONFIG_HOME="${HOME}/.config"
+XDG_DATA_HOME="${HOME}/.local/share"
+
+export XDG_CONFIG_HOME XDG_DATA_HOME ZDATADIR ZDOTDIR
+
