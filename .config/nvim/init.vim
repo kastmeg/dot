@@ -89,7 +89,8 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 autocmd Filetype go map <leader>r <Plug>(go-run)
 autocmd Filetype go map <leader>t <Plug>(go-test)
 autocmd Filetype go map <leader>b <Plug>(go-build)
-autocmd Filetype go map <leader>gi :GoImport 
+autocmd Filetype go map <leader>gi :GoImport<cr>
+autocmd Filetype go map <leader>gh :GoDoc<cr>
 
 " Jump to errors with CTRL+n and CTRL+m.
 noremap <C-n> :cnext<cr>
@@ -108,8 +109,9 @@ nnoremap <leader>ss :%s/\<<C-r><C-w>\>/
 " Faster saving and quitting
 nnoremap <leader>wq :wq!<cr>
 
-" Quit all open windows
-nnoremap <leader>q :qall!<cr>
+nnoremap <leader>q :q<cr>
+
+nnoremap <leader>f :Goyo
 
 " :Q = :q, :W = :w
 command! Q q
@@ -165,6 +167,7 @@ autocmd BufNewFile,BufRead *.html setlocal noexpandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.vim setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.yml setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.sh setlocal expandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.xkb setlocal expandtab tabstop=2 shiftwidth=2 ft=xkb
 
 " Set filetype to nginx for .conf files in the right directories
 autocmd BufRead,BufNewFile
@@ -192,15 +195,15 @@ let g:go_metalinter_autosave = 1
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
+    \ "Modified"  : "m",
+    \ "Staged"    : "s",
+    \ "Untracked" : "u",
+    \ "Renamed"   : "r",
+    \ "Unmerged"  : "um",
+    \ "Deleted"   : "D",
+    \ "Dirty"     : "X",
+    \ "Clean"     : "C",
+    \ 'Ignored'   : 'i',
     \ "Unknown"   : "?"
     \ }
 
@@ -257,8 +260,10 @@ let NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Spell Checking
 highlight clear SpellBad cterm
-highlight SpellBad ctermbg=NONE ctermfg=132 cterm=underline
+highlight SpellBad ctermbg=NONE ctermfg=167 cterm=underline
 setlocal spelllang=en_us
+set nospell
+
 " ^N and ^P to autocomplete
 autocmd FileType gitcommit setlocal spell complete+=kspell
 autocmd BufNewFile,BufRead *.md setlocal spell complete+=kspell
@@ -270,6 +275,6 @@ if &diff
   highlight LineNr ctermfg=238 ctermbg=black
   highlight Cursorlinenr ctermfg=95 ctermbg=NONE
   highlight cursorline ctermfg=95 ctermbg=NONE
-  set cursorline
+ set cursorline
 endif
 
