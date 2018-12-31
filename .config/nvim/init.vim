@@ -111,7 +111,7 @@ nnoremap <leader>wq :wq!<cr>
 
 nnoremap <leader>q :q<cr>
 
-nnoremap <leader>f :Goyo
+nnoremap <leader>f :Goyo<cr>
 
 " :Q = :q, :W = :w
 command! Q q

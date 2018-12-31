@@ -29,7 +29,7 @@ alias genpw32="base64 <(cat /dev/urandom | head -c 32)"
 
 alias clip="xclip -i -sel clipboard"
 
-alias ls="exa --git --color-scale -mghrs size"
+alias ls="exa --git --color-scale -mghrs name"
 alias lst="exa --group-directories-first --git --tree --color-scale -mghrs size"
 alias lsg="exa --group-directories-first --long --sort name -G"
 
