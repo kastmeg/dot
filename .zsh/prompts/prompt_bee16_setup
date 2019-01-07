@@ -1,0 +1,46 @@
+# vim: ft=zsh
+# bee16 - A simple zsh prompt
+# Author: Robin Eikaas <robin@eika.as>
+
+prompt_bee16_help() {
+	cat <<EOF
+bee16 - an extremely simple prompt adding little new to the world of prompts
+
+  prompt bee16 <color_a> <color_b> <color_c>
+
+It optionally takes three byte-sized arguments setting the prompt colors. Any
+unspecified colors will be picked at random.
+
+Example ~/.zshrc:
+
+  # add the parent directory to your fpath
+  fpath=( ~/.zsh/prompts $fpath)
+  # enable the promptinit module 
+  autoload -Uz promptinit; promptinit
+  prompt bee16 10 20 30
+
+EOF
+
+}
+
+prompt_bee16_setup() {
+	local color_a color_b color_c
+	[[ -z ${color_a} ]] && color_a=$((RANDOM % 255)) || color_a=$1
+	[[ -z ${color_b} ]] && color_b=$((RANDOM % 255)) || color_b=$2
+	[[ -z ${color_c} ]] && color_c=$((RANDOM % 255)) || color_c=$3
+
+  	autoload -Uz prompt_special_chars; prompt_special_chars
+	PS1="%F{$color_a}%~ %F{$color_c}%w %F{$color_b}%D{%I:%M:%S%P} $prompt_newline%F{$color_c}%K{black}%% "
+  	prompt_opts=(cr subst percent)
+}
+
+prompt_bee16_preview () {
+	local color_a color_b color_c
+	[[ -z ${color_a} ]] && color_a=$((RANDOM % 255)) || color_a=$1
+	[[ -z ${color_b} ]] && color_b=$((RANDOM % 255)) || color_b=$2
+	[[ -z ${color_c} ]] && color_c=$((RANDOM % 255)) || color_c=$3
+
+	prompt_preview_theme bee16 $color_a $color_b $color_c
+}
+
+prompt_bee16_setup "$@"
