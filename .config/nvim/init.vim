@@ -60,6 +60,9 @@ set smartcase
 set smartindent
 set lazyredraw
 set autowrite
+set shiftwidth=4
+set tabstop=4
+set noexpandtab
 
 "~~~~~~~~~~~~~~~~~~~~~~~
 " Key Mapping:
@@ -161,14 +164,6 @@ let g:neomake_warning_sign = {'text': 'w', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_exit = 1
 
-" filetype overrides:
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-autocmd BufNewFile,BufRead *.html setlocal noexpandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.vim setlocal expandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.yml setlocal expandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.sh setlocal expandtab tabstop=4 shiftwidth=4
-autocmd BufNewFile,BufRead *.xkb setlocal expandtab tabstop=2 shiftwidth=2 ft=xkb
-
 " Set filetype to nginx for .conf files in the right directories
 autocmd BufRead,BufNewFile
 	\ /etc/nginx/*,/usr/local/nginx/*,/opt/nginx/*
@@ -264,11 +259,17 @@ highlight SpellBad ctermbg=NONE ctermfg=167 cterm=underline
 setlocal spelllang=en_us
 set nospell
 
-" ^N and ^P to autocomplete
+" filetype overrides:
 autocmd FileType gitcommit setlocal spell complete+=kspell
 autocmd BufNewFile,BufRead *.md setlocal spell complete+=kspell
 autocmd BufNewFile,BufRead *.txt setlocal spell complete+=kspell
 autocmd BufNewFile,BufRead *.markdown setlocal spell complete+=kspell
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.html setlocal noexpandtab tabstop=2 shiftwidth=2
+autocmd BufNewFile,BufRead *.vim setlocal expandtab tabstop=2 shiftwidth=2
+autocmd BufNewFile,BufRead *.yml setlocal expandtab tabstop=2 shiftwidth=2
+autocmd BufNewFile,BufRead *.sh setlocal expandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.xkb setlocal expandtab tabstop=2 shiftwidth=2 ft=xkb
 
 " vimdiff
 if &diff 
