@@ -1,0 +1,22 @@
+# vim: ft=zsh sw=4 ts=4
+
+#cdPrevDir() { 
+#  popd &>/dev/null
+#  zle reset-prompt
+#  echo -e "\n\e[30m$(pwd)\e[0m"
+#  zle reset-prompt
+#}
+#zle -N cdPrevDir
+#
+#cdParentDir() {
+#  pushd .. &>/dev/null
+#  zle reset-prompt
+#  echo -e "\n\e[30m$(pwd)\e[0m"
+#  zle reset-prompt
+#}
+#zle -N cdParentDir
+
+# Sort by line length
+sort_len() {
+	awk '{print length, $0 }' | sort -nsr | cut -d" " -f2-
+}
