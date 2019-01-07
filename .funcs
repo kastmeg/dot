@@ -20,3 +20,7 @@ cdParentDir() {
 sort_len() {
 	awk '{print length, $0 }' | sort -nsr | cut -d" " -f2-
 }
+# rnb outputs a random byte
+rnb() {
+	echo $((RANDOM % 255))
+}
