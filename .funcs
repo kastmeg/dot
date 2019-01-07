@@ -1,20 +1,20 @@
 # vim: ft=zsh sw=4 ts=4
 
-#cdPrevDir() { 
-#  popd &>/dev/null
-#  zle reset-prompt
-#  echo -e "\n\e[30m$(pwd)\e[0m"
-#  zle reset-prompt
-#}
-#zle -N cdPrevDir
-#
-#cdParentDir() {
-#  pushd .. &>/dev/null
-#  zle reset-prompt
-#  echo -e "\n\e[30m$(pwd)\e[0m"
-#  zle reset-prompt
-#}
-#zle -N cdParentDir
+# cd previous directory (Alt+Left)
+cdPrevDir() {
+  popd &>/dev/null
+  zle reset-prompt
+  echo -e "\n\e[30m$(pwd)\e[0m"
+  zle reset-prompt
+}; zle -N cdPrevDir; bindkey '^[[1;3D' cdPrevDir
+
+# cd parent directory (Alt+Up)
+cdParentDir() {
+  pushd .. &>/dev/null
+  zle reset-prompt
+  echo -e "\n\e[30m$(pwd)\e[0m"
+  zle reset-prompt
+}; zle -N cdParentDir; bindkey '^[[1;3A' cdParentDir
 
 # Sort by line length
 sort_len() {
