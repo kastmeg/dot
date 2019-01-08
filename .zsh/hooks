@@ -6,21 +6,19 @@
 # Do something interesting with them
 
 # chpwd is run every time the directory changes
-chpwd() { ; }
+#chpwd() { ; }
 
 # precmd is run before the prompt is drawn
-precmd() { ; }
+#precmd() { ; }
 
 # preexec is executed after the command is read and right
 # before it is executed.
-preexec() { ; }
+#preexec() { ; }
 
 # zshaddhistory is executed when a history line 
 # has been read interactively, but before it is executed.
 # The sole argument is the complete history line 
-zshaddhistory() { ; }
+#zshaddhistory() { ; }
 
 # runs every x, where x must be defined in <dont-remember-check-zshmisc-manpage>
-periodic() {
-	;
-}
+#periodic() { ; }

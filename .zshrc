@@ -1,11 +1,17 @@
 # vim: ft=zsh sw=4 ts=4
-#
+
+# This is a tmpfs in my case and that has implications on the
+# completion system (e.g compinit's .zcompdump will routinely get rebuilt as ~/.cache is cleared)
+_ZSH_CACHE="${HOME}/.cache/zsh"
+mkdir -p "${_ZSH_CACHE}"
+mkdir -p "${XDG_DATA_HOME}/zsh"
+
 # Debugging (You might want to turn these off)
 # setopt SOURCE_TRACE
-setopt WARN_CREATE_GLOBAL
-setopt WARN_NESTED_VAR
-setopt PRINT_EXIT_VALUE
-setopt EVAL_LINENO
+#setopt WARN_CREATE_GLOBAL
+#setopt WARN_NESTED_VAR
+#setopt PRINT_EXIT_VALUE
+#setopt EVAL_LINENO
 
 # Enable ZLE
 setopt ZLE
@@ -17,7 +23,7 @@ setopt VI
 setopt C_BASES
 
 # Notify when jobs finish
-setopt NOTIFY
+# setopt NOTIFY
 
 # Allow Multiple pipes, sounds like something we'd like
 setopt MULTIOS                 
@@ -66,11 +72,9 @@ if [[ -d "/usr/share/fzf" ]]; then
 	source "/usr/share/fzf/completion.zsh"
 fi
 
-# Enables bash-isms
 bindkey '^e' end-of-line
 bindkey '^a' beginning-of-line
 bindkey '^r' history-incremental-search-backward
-# Enable vim-like keybindings
 bindkey -v
 bindkey -M vicmd "/" history-incremental-search-backward
 bindkey -M vicmd "?" history-incremental-search-forward
@@ -81,10 +85,17 @@ bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M vicmd 'u' undo
 
 # commandline completion
+if hash pandoc 2>/dev/null; then
+	eval $(pandoc --bash-completion)
+fi
+autoload -U +X bashcompinit && bashcompinit
+
+ZLS_COLORS=""; zmodload -i zsh/complist
+
 setopt COMPLETE_ALIASES
 zstyle ':completion:*' rehash true
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.cache/zsh/
+zstyle ':completion:*' cache-path ${_ZSH_CACHE}
 zstyle ':completion:*' completer _expand _complete _ignored
 zstyle ':completion:*' file-sort name
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]} l:|=* r:|=*' 'm:{[:lower:]}={[:upper:]} l:|=* r:|=*' 'm:{[:lower:]}={[:upper:]} l:|=* r:|=*' 'm:{[:lower:]}={[:upper:]} l:|=* r:|=*'
@@ -92,15 +103,8 @@ zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion::complete:*' gain-privileges 1
 zstyle ':completion:*:*:*:*:processes' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
-autoload -Uz compinit; compinit
-
-# If zsh-completion is missing for a command, then bash-completion can be used in its stead. 
-# (Not 100% sure about this)
-# autoload -U +X bashcompinit && bashcompinit
-# eval $(pandoc --bash-completion)
-
-# No idea what this does, disabled
-# zmodload -i zsh/complist
+autoload -Uz compinit
+compinit -C -d "${_ZSH_CACHE}/.zcompdump"
 
 # easy to use zsh hooks that does nothing at the moment
 [[ -r "${HOME}/.zsh/hooks" ]] && source "${HOME}/.zsh/hooks"
@@ -108,7 +112,8 @@ autoload -Uz compinit; compinit
 # Prompt
 fpath=( "${HOME}/.zsh/prompts" $fpath )
 autoload -Uz promptinit; promptinit
-prompt bee16
+# prompt walters
+prompt bee16 13 14 15
 
 # Source ~/.funcs and ~/.alias
 [[ -r "${HOME}/.funcs" ]] && source "${HOME}/.funcs"

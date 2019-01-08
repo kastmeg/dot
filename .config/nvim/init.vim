@@ -23,7 +23,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'mdempsky/gocode'        ", { 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
 Plug 'godoctor/godoctor.vim'  " :Rename, :Refactor
-Plug 'jodosha/vim-godebug'    " Add debugging break-points in vim
+" Plug 'jodosha/vim-godebug'    " Bugged, related to my ~/.cache. w/e for now
 Plug 'pearofducks/ansible-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fidian/hexmode'           " :hexmode
@@ -31,7 +31,6 @@ Plug 'tpope/vim-sleuth'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mhinz/vim-startify'
 Plug 'mboughaba/i3config.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
@@ -52,7 +51,6 @@ set mouse=a
 set scrolloff=8
 set fileformats=unix,dos,mac
 set encoding=utf-8
-set clipboard^=unnamed
 set clipboard^=unnamedplus
 set showmatch
 set ignorecase
@@ -116,28 +114,6 @@ nnoremap <leader>f :Goyo<cr>
 " :Q = :q, :W = :w
 command! Q q
 command! W w
-
-" Define keyboard mappings for neovim's built-in terminal
-if has('nvim')
-  tnoremap <Esc> <Esc><C-\><C-n>
-
-  " mappings to move out from terminal to other views
-  tnoremap <C-h> <C-\><C-n><C-w>h
-  tnoremap <C-j> <C-\><C-n><C-w>j
-  tnoremap <C-k> <C-\><C-n><C-w>k
-  tnoremap <C-l> <C-\><C-n><C-w>l
-
-  " Open terminal in vertical, horizontal and new tab
-  nnoremap <leader>tv :vsplit term://zsh<cr>
-  nnoremap <leader>ts :split term://zsh<cr>
-  nnoremap <leader>tt :tabnew term://zsh<cr>
-
-  " always start terminal in insert mode
-  autocmd BufWinEnter,WinEnter term://* startinsert
-
-  noremap <silent> <C-T> :Ttoggle<cr>
-  noremap <silent> <C-T> :Ttoggle<cr>
-endif
 
 "~~~~~~~~~~~~~~~~~~~~~~~
 " Configuration:
@@ -277,4 +253,3 @@ if &diff
   highlight cursorline ctermfg=95 ctermbg=NONE
  set cursorline
 endif
-

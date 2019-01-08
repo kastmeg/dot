@@ -14,17 +14,18 @@ unspecified colors will be picked at random.
 Example ~/.zshrc:
 
   # add the parent directory to your fpath
-  fpath=( ~/.zsh/prompts $fpath)
+  fpath=( ~/.zsh/prompts \$fpath)
   # enable the promptinit module 
   autoload -Uz promptinit; promptinit
   prompt bee16 10 20 30
 
 EOF
-
 }
 
 prompt_bee16_setup() {
-	local color_a color_b color_c
+	local color_a
+	local color_b 
+	local color_c
 	[[ -z ${color_a} ]] && color_a=$((RANDOM % 255)) || color_a=$1
 	[[ -z ${color_b} ]] && color_b=$((RANDOM % 255)) || color_b=$2
 	[[ -z ${color_c} ]] && color_c=$((RANDOM % 255)) || color_c=$3
@@ -35,12 +36,8 @@ prompt_bee16_setup() {
 }
 
 prompt_bee16_preview () {
-	local color_a color_b color_c
-	[[ -z ${color_a} ]] && color_a=$((RANDOM % 255)) || color_a=$1
-	[[ -z ${color_b} ]] && color_b=$((RANDOM % 255)) || color_b=$2
-	[[ -z ${color_c} ]] && color_c=$((RANDOM % 255)) || color_c=$3
-
-	prompt_preview_theme bee16 $color_a $color_b $color_c
+	#prompt_preview_theme bee16 13 14 15
+	echo "no idea"
 }
 
 prompt_bee16_setup "$@"
