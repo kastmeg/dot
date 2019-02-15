@@ -61,7 +61,7 @@
 " │ <L>sv   │ Source init.vim                │
 " │         │                                │
 " ╰─────────┴────────────────────────────────╯
-let PLUGDIR=$XDG_DATA_HOME . '/nvidia/plugged'
+let PLUGDIR=$XDG_DATA_HOME . '/nvim/plugged'
 let VIMHOME=$XDG_CONFIG_HOME . '/nvim'
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
