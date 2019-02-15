@@ -7,7 +7,8 @@ mkdir -p "${_ZSH_CACHE}"
 mkdir -p "${XDG_DATA_HOME}/zsh"
 
 # Debugging (You might want to turn these off)
-# setopt SOURCE_TRACE
+zmodload zsh/zprof
+#setopt SOURCE_TRACE
 #setopt WARN_CREATE_GLOBAL
 #setopt WARN_NESTED_VAR
 #setopt PRINT_EXIT_VALUE
@@ -26,7 +27,7 @@ setopt C_BASES
 # setopt NOTIFY
 
 # Allow Multiple pipes, sounds like something we'd like
-setopt MULTIOS                 
+setopt MULTIOS
 
 # Allow comments in interactive shells
 setopt INTERACTIVE_COMMENTS
@@ -61,10 +62,12 @@ setopt HIST_REDUCE_BLANKS
 unsetopt BEEP
 unsetopt AUTOCD
 
-# Use the GnuPG agent as SSH agent
-GPG_AGENT_SSH_SOCKET="$(gpgconf --list-dirs agent-ssh-socket)"
-[[ -s "${GPG_AGENT_SSH_SOCKET}" ]] && \
-	export SSH_AUTH_SOCK="${GPG_AGENT_SSH_SOCKET}"
+# Source functions
+[[ -r "${HOME}/.funcs" ]] && source "${HOME}/.funcs"
+
+# Using gpg as ssh agent
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+export DEBUG_SSH_AUTH_SOCKET="$(gpgconf --list-dirs agent-extra-socket)"
 
 # Enable fzf (pacman -S fzf)
 if [[ -d "/usr/share/fzf" ]]; then
@@ -88,7 +91,7 @@ bindkey -M vicmd 'u' undo
 if hash pandoc 2>/dev/null; then
 	eval $(pandoc --bash-completion)
 fi
-autoload -U +X bashcompinit && bashcompinit
+#autoload -U +X bashcompinit && bashcompinit
 
 ZLS_COLORS=""; zmodload -i zsh/complist
 
@@ -103,7 +106,16 @@ zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion::complete:*' gain-privileges 1
 zstyle ':completion:*:*:*:*:processes' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format "$fg[yellow]%B--- %d%b"
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
+zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+zstyle ':completion:*' group-name ''
+
 autoload -Uz compinit
+rm -rf "${_ZSH_CACHE}/.zcompdump"
 compinit -C -d "${_ZSH_CACHE}/.zcompdump"
 
 # easy to use zsh hooks that does nothing at the moment
@@ -112,9 +124,74 @@ compinit -C -d "${_ZSH_CACHE}/.zcompdump"
 # Prompt
 fpath=( "${HOME}/.zsh/prompts" $fpath )
 autoload -Uz promptinit; promptinit
-# prompt walters
-prompt bee16 13 14 15
 
-# Source ~/.funcs and ~/.alias
-[[ -r "${HOME}/.funcs" ]] && source "${HOME}/.funcs"
+# Thanks to Sindre Sorhus for the great pure-prompt
+# https://github.com/sindresorhus/pure
+PURE_CMD_MAX_EXEC_TIME=1 # 5
+PURE_PROMPT_SYMBOL=""
+PURE_PROMPT_VICMD_SYMBOL="ᝰ "
+# PURE_GIT_UNTRACKED_DIRTY=0
+# PURE_GIT_DELAY_DIRTY_CHECK=1800
+# PURE_GIT_DOWN_ARROW="⇣"
+# PURE_GIT_UP_ARROW="⇡"
+# PURE_GIT_PULL=0
+
+# I have added some custom modifications and impurities to the
+# theme which are explained/configured as follows
+
+# Display poops proportional to clutter in your homedir
+IMPURE_CLUTTER_POOP=1
+
+# Adds a "permission denied" symbol to the path if its read-only to the user
+IMPURE_READ_ONLY_PATH_SYMBOL="%F{red} %f"
+
+# Path is replaced with the map value of the key matches the pwd exactly
+declare -A IMPURE_REPLACE_PATH=(
+	[~]="%F{green}  ~"
+	[/]="%F{red}/%f"
+	[/cloud]="%F{white}/cloud  %f"
+	[/tmp]="%F{white}/tmp  %f"
+	[/usr/local/src]="%F{yellow}/usr/local/src%f"
+)
+
+# Map value is prepended to the path if the key matches any part of the pwd
+declare -A IMPURE_PREPEND_PATH=(
+	[bin]="%F{magenta}"
+	[eikaas]="%F{yellow}"
+	[code]="%F{yellow}"
+)
+
+# Map value is appended to the end of the path if the key matches any part of the pwd
+declare -A IMPURE_APPEND_PATH=(
+	[/home/robin]="%F{green} %f"
+	[bin]="%F{yellow} %f"
+	[eikaas]=" %f"
+	[code]=" %f"
+	[.git]="%F{purple} %f"
+)
+prompt pure
+
+# Source ~/.alias
 [[ -r "${HOME}/.alias" ]] && source "${HOME}/.alias"
+
+# Test
+setopt auto_name_dirs
+setopt auto_list
+setopt auto_menu
+
+# No delay for normal mode
+KEYTIMEOUT=1
+
+# Set space as the 'leader' key
+bindkey -a -r ' '
+# Open man-page on current command (Leaves command untouched) (Esc+space+m)
+bindkey -a ' 'm run-help
+
+# `less` colors
+export LESS_TERMCAP_mb=$'\E[01;31m'             # begin blinking
+export LESS_TERMCAP_md=$'\E[01;31m'             # begin bold
+export LESS_TERMCAP_me=$'\E[0m'                 # end mode
+export LESS_TERMCAP_se=$'\E[0m'                 # end standout-mode
+export LESS_TERMCAP_so=$'\E[01;44;33m'          # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'                 # end underline
+export LESS_TERMCAP_us=$'\E[01;32m' 			# begin underline

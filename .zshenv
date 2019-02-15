@@ -1,10 +1,7 @@
-export XDG_CONIFG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
 
-export LC_ALL="en_US.UTF-8"
-export LANG="en_US.UTF-8"
-export LANGUAGE="en_US.UTF-8"
-export TZ="Europe/Oslo"
+#export LC_ALL="en_US.UTF-8"
+#export LANG="en_US.UTF-8"
+#export TZ="Europe/Oslo"
 
 export BROWSER=firefox
 export EDITOR=vim
@@ -14,7 +11,7 @@ export TERMINAL=xfce4-terminal
 
 # go my own cloud, bitches!
 export CLOUD="/cloud"
-export IMAGES="${CLOUD}/img"
+export IMAGES="${CLOUD}/images"
 export NOTES="${CLOUD}/notes"
 export GOPATH="${CLOUD}"
 export CODE="${GOPATH}/src/github.com/eikaas"

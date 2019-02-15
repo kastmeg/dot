@@ -24,3 +24,58 @@ sort_len() {
 rnb() {
 	echo $((RANDOM % 255))
 }
+
+# cprt <msg> [<sym>,<sym_color>,<msg_color>]
+cout() {
+	local sym=$(echo -ne "$(d2u $((0xf000 + RANDOM % 0xfff)))")
+	printf " \e[38;5;%dm${sym}\e[0m | \e[38;5;%dm%s\e[0m\n" \
+		"${3:-$((RANDOM % 0xff))}" "${4:-$((RANDOM % 0xff))}" "${1:-msg}"
+}
+
+isint() {
+	for i in "$@"; do
+			egrep -q '^\-?[0-9A-Fa-f]+$' <<< $i || return 1
+	done
+
+	return 0
+}
+
+h2d() {
+	local buf
+	for i in "$@"; do
+		buf="${buf} $(echo "ibase=16; ${i}" | bc)"
+	done
+}
+
+rgb() {
+	local _r=$1
+	local _g=$2
+	local _b=$3
+
+	if [[ $_r =~ '^-(-?)(clr|clear|stop|0)$' ]]; then
+		echo -ne "\e[0m"
+		return 0
+	fi
+
+	if [[ -z $_g && -z $_b ]]; then
+		if [[ ${_r} =~ '^\#[0-9A-Fa-f]+' ]]; then
+			echo "html color"
+			return 0
+		fi
+	fi
+
+	echo -en "\e[38;2;${_r};${_g};${_b}m"
+	return 0
+}
+
+say() {
+	local sym="\e[38;5;146m!\e[0m"
+	printf " %5s| %s" "$sym" "$@"
+}
+function meatsword() {
+	toilet --rainbow "Here! Take my sword"
+	PURE_PROMPT_SYMBOL="𓂸  "
+	prompt pure
+}
+
+
