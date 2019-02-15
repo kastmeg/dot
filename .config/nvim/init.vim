@@ -1,78 +1,68 @@
-"      ╔════════════════════════════════╗
-"      ║                                ║
-"      ║  █▟█▌ ▟█▙ ▐▙█▙  ██  ▐▙██▖▗▟██▖ ║
-"      ║  █▘  ▐▛ ▜▌▐▛ ▜▌  █  ▐▛ ▐▌▐▙▄▖▘ ║
-"      ║  █   ▐▌ ▐▌▐▌ ▐▌  █  ▐▌ ▐▌ ▀▀█▖ ║
-"      ║  █   ▝█▄█▘▐█▄█▘▗▄█▄▖▐▌ ▐▌▐▄▄▟▌ ║
-"      ║  ▀    ▝▀▘ ▝▘▀▘ ▝▀▀▀▘▝▘ ▝▘ ▀▀▀  ║
-"      ║ ▐▙██▖ ▟█▙  ▟█▙ ▐▙ ▟▌ ██  ▐█▙█▖ ║
-"      ║ ▐▛ ▐▌▐▙▄▟▌▐▛ ▜▌ █ █   █  ▐▌█▐▌ ║
-"      ║ ▐▌ ▐▌▐▛▀▀▘▐▌ ▐▌ ▜▄▛   █  ▐▌█▐▌ ║
-"      ║ ▐▌ ▐▌▝█▄▄▌▝█▄█▘ ▐█▌ ▗▄█▄▖▐▌█▐▌ ║
-"      ║ ▝▘ ▝▘ ▝▀▀  ▝▀▘   ▀  ▝▀▀▀▘▝▘▀▝▘ ║
-"      ║ configuration (/w cool boxart) ║
-"      ╚════════════════════════════════╝
-" ╔══════════════════════════════════════════╗
-" ║ About                                    ║
-" ╟──────────────────────────────────────────╢
-" ║ My neovim config. Mostly used for        ║
-" ║ * Go                                     ║
-" ║ * Shell                                  ║
-" ║ * Markdown                               ║
-" ║                                          ║
-" ║ Certainly has its quirks and probably    ║
-" ║ meant for general consumption.           ║
-" ╟──────────────────────────────────────────╢
-" ║ Boxes?                                   ║
-" ╟──────────────────────────────────────────╢
-" ║ Don't let the boxes fool you! Probably   ║
-" ║ the coolest thing about this file.       ║
-" ║                                          ║
-" ║ This vim config isn't even particularly  ║
-" ║ well suited to box-construction.         ║
-" ║                                          ║
-" ║ Heres a good reference for unicode box   ║
-" ║ elements:                                ║
-" ║                                          ║
-" ║ * jrgraphix.net/r/Unicode/2500-257F      ║
-" ║                                          ║
-" ║ Vim-plugin to surround text in awesome   ║
-" ║ box-art would be nice                    ║
-" ╚══════════════════════════════════════════╝
-" ╔══════════════════════════════════════════╗
-" ║ Keybindings                              ║
-" ╟──────────────────────────────────────────╢
-" ║ * <L>eader key is mapped to space        ║
-" ║ * Arrow-keys manage tabs                 ║
-" ╟╌╌╌╌╌╌╌╌╌┬╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╢
-" ║ ^C-Up   │ New Tab                        ║
-" ║ ^C-Down │ Close Tab                      ║
-" ║ ^C-Left │ Previous Tab                   ║
-" ║ ^C-Right│ Next Tab                       ║
-" ╟─────────┼────────────────────────────────╢
-" ║ ^X^F    │ Complete Path                  ║
-" ║ ^N      │ Complete Word (^Next ^Prev)    ║
-" ║ <L>o    │ Open Buffer Explorer           ║
-" ║ <L>f    │ Open MRU                       ║
-" ║ <L>ss   │ Replace word under cursor      ║
-" ║ <L>[ret]│ Open terminal                  ║
-" ║ <L>ev   │ Open init.vim in a v-split     ║
-" ║ <L>sv   │ Source init.vim                ║
-" ║         │                                ║
-" ╟─────────┴────────────────────────────────╢
-" ║                                          ║
-" ╚══════════════════════════════════════════╝
-"
-" ╔═══════════╗
-" │ Variables │
-" ╰───────────╯
+"     ╭═════════════════════════════════╮
+"     ║                                 ║
+"     ║  █▟█▌ ▟█▙ ▐▙█▙  ██  ▐▙██▖▗▟██▖  ║
+"     ║  █▘  ▐▛ ▜▌▐▛ ▜▌  █  ▐▛ ▐▌▐▙▄▖▘  ║
+"     ║  █   ▐▌ ▐▌▐▌ ▐▌  █  ▐▌ ▐▌ ▀▀█▖  ║
+"     ║  █   ▝█▄█▘▐█▄█▘▗▄█▄▖▐▌ ▐▌▐▄▄▟▌  ║
+"     ║  ▀    ▝▀▘ ▝▘▀▘ ▝▀▀▀▘▝▘ ▝▘ ▀▀▀   ║
+"     ║ ▐▙██▖ ▟█▙  ▟█▙ ▐▙ ▟▌ ██  ▐█▙█▖  ║
+"     ║ ▐▛ ▐▌▐▙▄▟▌▐▛ ▜▌ █ █   █  ▐▌█▐▌  ║
+"     ║ ▐▌ ▐▌▐▛▀▀▘▐▌ ▐▌ ▜▄▛   █  ▐▌█▐▌  ║
+"     ║ ▐▌ ▐▌▝█▄▄▌▝█▄█▘ ▐█▌ ▗▄█▄▖▐▌█▐▌  ║
+"     ║ ▝▘ ▝▘ ▝▀▀  ▝▀▘   ▀  ▝▀▀▀▘▝▘▀▝▘  ║
+"     ║ configuration (/w cool boxart)  ║
+"     ╰═════════════════════════════════╯
+" ╭══════════════════════════════════════════╮
+" │ About                                    │
+" ├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┤
+" │ Used primarily for                       │
+" │ * Go                                     │
+" │ * Shell                                  │
+" │ * Markdown                               │
+" │ * Making boxes in config files           │
+" ├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┤
+" │ Features:                                │
+" │ * Deceptive & outdated comments          │
+" │ * Unresolved plugin dependencies         │
+" │ * Duplicated stuff                       │
+" │ * Boxes                                  │
+" │                                          │
+" ╞══════════════════════════════════════════╡
+" │ Boxes???                                 │
+" ├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┤
+" │ Don't let the boxes fool you! Probably   │
+" │ the coolest thing about this file.       │
+" │                                          │
+" │ This vim config isn't even particularly  │
+" │ well suited to box-construction.         │
+" │                                          │
+" │ Heres a good reference for unicode box   │
+" │ elements:                                │
+" │                                          │
+" │ * jrgraphix.net/r/Unicode/2500-257F      │
+" ╞══════════════════════════════════════════╡
+" │ Keybindings                              │
+" ├┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┤
+" │ * <L>eader key is mapped to space        │
+" │ * Arrow-keys manage tabs                 │
+" ├┄┄┄┄┄┄┄┄┄┬┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┤
+" │ ^C-Up   │ New Tab                        │
+" │ ^C-Down │ Close Tab                      │
+" │ ^C-Left │ Previous Tab                   │
+" │ ^C-Right│ Next Tab                       │
+" ├┄┄┄┄┄┄┄┄┄┼┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┤
+" │ ^X^F    │ Complete Path                  │
+" │ ^N      │ Complete Word (^Next ^Prev)    │
+" │ <L>o    │ Open Buffer Explorer           │
+" │ <L>f    │ Open MRU                       │
+" │ <L>ss   │ Replace word under cursor      │
+" │ <L>[ret]│ Open terminal                  │
+" │ <L>ev   │ Open init.vim in a v-split     │
+" │ <L>sv   │ Source init.vim                │
+" │         │                                │
+" ╰─────────┴────────────────────────────────╯
 let PLUGDIR=$XDG_DATA_HOME . '/nvidia/plugged'
 let VIMHOME=$XDG_CONFIG_HOME . '/nvim'
-
-" ╔═══════════╗
-" │ Functions │
-" ╰───────────╯
-" Requires a working rust compiler
 function! BuildComposer(info)
   if a:info.status != 'unchanged' || a:info.force
     if has('nvim')
@@ -83,9 +73,6 @@ function! BuildComposer(info)
   endif
 endfunction
 
-" ╔═════════╗
-" │ Plugins │
-" ╰─────────╯
 call plug#begin(PLUGDIR)
 Plug 'neomake/neomake'
 Plug 'airblade/vim-gitgutter'
@@ -106,15 +93,14 @@ Plug 'vim-scripts/mru.vim'
 Plug 'amix/open_file_under_cursor.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'w0rp/ale'
 Plug 'ternjs/tern_for_vim'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'maxbrunsfeld/vim-yankstack'
 call plug#end()
 
-" ╔══════════╗
-" │ Settings │
-" ╰──────────╯
 set noerrorbells
 set nowrap
 set number
@@ -137,9 +123,6 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" ╔═════════════╗
-" │ Keybindings │
-" ╰─────────────╯
 let mapleader = " "
 nnoremap <leader>h <C-w>h<cr>
 nnoremap <leader>j <C-w>j<cr>
@@ -305,3 +288,5 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let NVIM_TUI_ENABLE_TRUE_COLOR=1
 let NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+
