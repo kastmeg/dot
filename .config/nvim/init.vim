@@ -131,8 +131,8 @@ nnoremap <leader>l <C-w>l<cr>
 nnoremap <leader><enter> <C-w><C-v><C-l>:terminal<cr>
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-noremap <C-e> :cnext<cr>
-noremap <C-m> :cprevious<cr>
+nnoremap <C-e> :cnext<cr>
+nnoremap <C-m> :cprevious<cr>
 nnoremap <leader>e :cclose<cr>
 
 nnoremap <up> <nop>
@@ -154,6 +154,9 @@ nnoremap <leader>o :BufExplorer<cr>
 nnoremap <leader>f :MRU<cr>
 command! Q q
 command! W w
+
+nmap <leader>e :exec '!'.getline('.')<cr>
+nmap <leader>r :w<cr>:!chmod +x % && ./% <cr>
 
 " ╔════════════════╗
 " │ Spell checking │

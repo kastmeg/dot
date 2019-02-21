@@ -134,7 +134,7 @@ PURE_PROMPT_VICMD_SYMBOL="ᝰ "
 # PURE_GIT_DELAY_DIRTY_CHECK=1800
 # PURE_GIT_DOWN_ARROW="⇣"
 # PURE_GIT_UP_ARROW="⇡"
-# PURE_GIT_PULL=0
+PURE_GIT_PULL=1
 
 # I have added some custom modifications and impurities to the
 # theme which are explained/configured as follows
