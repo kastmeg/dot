@@ -40,5 +40,17 @@ alias sanekeys="setxkbmap -model thinkpad -layout us -variant altgr-intl"
 alias o="xdg-open"
 alias open="xdg-open"
 alias n="cd /cloud/notes"
+alias hx='hexump -Cv'
+alias cpkey="gpg --export-ssh-key Robin | xclip"
+alias xp="xclip"
+alias pwed="pass edit $1"
+alias pwclip="pass show --clip $1"
+alias pwqr="pass show --qrcode $1"
+alias ipshow="ip -4 -brief address show; ip -6 -brief address show"
 
+
+# Docker
 alias docker-aur-build="docker run -v $PWD:/pkg docker-aur-builder"
+alias doctl-ls='doctl compute droplet list --format "Name,Image,PublicIPv4,Memory,VCPUs,Disk,Region"'
+alias pom="pomogoro -config ~/.config/pomogoro/config.toml"
+alias todo="vim ~/todo.txt"
