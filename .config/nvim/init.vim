@@ -73,32 +73,9 @@ function! BuildComposer(info)
   endif
 endfunction
 
+" Loading plugins.
 call plug#begin(PLUGDIR)
-Plug 'neomake/neomake'
-Plug 'airblade/vim-gitgutter'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do':  PLUGDIR . '/gocode/vim/install.sh' }
-Plug 'Nequo/vim-allomancer'
-Plug 'fidian/hexmode'
-Plug 'tpope/vim-sleuth'
-Plug 'chriskempson/base16-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-Plug 'SirVer/ultisnips'
-Plug 'pearofducks/ansible-vim'
-Plug 'vim-scripts/mru.vim'
-Plug 'amix/open_file_under_cursor.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'w0rp/ale'
-Plug 'ternjs/tern_for_vim'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'vim-scripts/bufexplorer.zip'
-Plug 'maxbrunsfeld/vim-yankstack'
+source ~/.config/nvim/plug.vim
 call plug#end()
 
 set noerrorbells
@@ -291,5 +268,4 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let NVIM_TUI_ENABLE_TRUE_COLOR=1
 let NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-
 
