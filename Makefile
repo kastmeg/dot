@@ -11,7 +11,7 @@ stow:
 .PHONY: vimplug
 vimplug: stow
 	curl -sSLf -o "${VIMPLUG_PATH}" --create-dirs "${VIMPLUG_URL}"
-	nvim -c "PlugInstall" -c "exit" -c "exit" 
+	nvim -c "PlugInstall" -c "exit" -c "exit"
 
 .PHONY: pkgs
 pkgs:
