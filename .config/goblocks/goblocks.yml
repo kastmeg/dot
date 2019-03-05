@@ -1,20 +1,20 @@
-# bluetooth   
-# USB 	
+# bluetooth  
+# USB 
 # folder 
 # mic   
 # servers 
 # toggle   
-# Battery: 	    	 	
-# Hash   
+# Battery: 	    	 
+# Hash  
 # Terminal 
 # lightning 
 # disconnect 
-# volume 			
-# cogs    
-# brightness / contrast  
-# mail 	
+# volume 		
+# cogs   
+# brightness / contrast 
+# mail 
 #
-#  
+# 
 global:
     debug: False
     refresh_interval: 1

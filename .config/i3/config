@@ -20,7 +20,7 @@ bindsym $mod+Shift+s exec escrotum --select --clipboard --selection-delay 30 $sc
 bindsym $mod+§ exec escrotum --select --clipboard --selection-delay 30 $screenshot && notify-send "Copied screenshot to clipboard"
 
 # -------------------------------------------
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec xfce4-terminal
 bindsym $mod+b exec firefox
 bindsym $mod+s exec rofi -show ssh
 bindsym $mod+r exec rofi -show run
