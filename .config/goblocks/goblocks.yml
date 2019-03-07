@@ -20,66 +20,27 @@ global:
     refresh_interval: 1
 
 blocks:
-    - type: disk
-      label: "  "
-      color: "#FFCB6B" # Yellow
-      filesystems:
-          /: 90
-          /home: 90
-          /var: 90
-          /boot: 90
-
-    - type: load
-      label: "  "
-      color: "#C3E88D" # Green
-      crit_load: 2
-
-    - type: memory
-      label: "  "
-      color: "#89DDFF" # Cyan
-      crit_mem: 1
-
-    - type: interface
-      interface_name: wg0
-      update_interval: 5
-      interface_format: "{{.Status}}"
-      color: "#C3E88D" # Green
-
-    - type: command
-      label: "  "
-      color: "#E8C38D"
-      update_interval: 60
-      command: "/home/robin/bin/wgstatus --single-line"
-
-    - type: temperature
-      label: "  "
-      cpu_temp_path: /sys/devices/platform/coretemp.0/hwmon
-      crit_temp: 68
-      color: "#C792EA" # Magenta
-
-      #- type: interface
-      #label: "  "
-      #interface_name: ens2
-      #interface_format: "{{.Status}}"
-      #color: "#FFCB6B" # Yellow
-
-    - type: interface
-      label: "  "
-      interface_name: wlp3s0
-      interface_format: "{{.Status}}"
-      color: "#89DDFF" # Cyan
-
     - type: battery
       label: "   "
       battery_number: 0
       crit_battery: 20
-      color: "#FFCB6B" # Yellow
+      color: "#FFCB6B"
+
+    - type: load
+      label: "  "
+      color: "#C3E88D"
+      crit_load: 2
+
+    - type: memory
+      label: "  "
+      color: "#89DDFF"
+      crit_mem: 1
 
     - type: volume
       update_interval: 60
       label: "  "
       update_signal: 1
-      color: "#C792EA" # Magenta
+      color: "#C792EA"
       mixer_device: default
       channel: Master
 
@@ -89,13 +50,36 @@ blocks:
       command: 'curl ip.ccnp.no'
 
     - type: time
-      label: "  "
-      update_interval: 0.5
-      color: "#C792EA" # Magenta
-      time_format: 15:04:05
-
-    - type: time
       label: ""
       update_interval: 60
       time_format: 02-01-2006
-      color: "#FFCB6B" # Yellow
+      color: "#FFCB6B"
+
+    - type: disk
+      label: "  "
+      color: "#FFCB6B"
+      filesystems:
+          /: 90
+          /home: 90
+          /var: 90
+          /boot: 90
+
+    # The rest of the checks are dependant on variables
+    # that might not be the same between systems.
+    # If something like a path doesn't exist, the block is
+    # replaced with an intrusive red error message instead
+    # which is !nice
+
+    - type: temperature
+      label: "  "
+      cpu_temp_path: /sys/devices/platform/coretemp.0/hwmon
+      crit_temp: 68
+      color: "#C792EA"
+
+    - type: time
+      label: "  "
+      update_interval: 0.5
+      color: "#C792EA"
+      time_format: 15:04:05
+
+

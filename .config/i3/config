@@ -4,7 +4,7 @@ set $mod Mod4
 # -------------------------------------------
 floating_modifier $mod
 smart_gaps on
-gaps inner 20
+gaps inner 5
 hide_edge_borders both
 workspace_auto_back_and_forth yes
 font pango:DEC Terminal 10
@@ -12,7 +12,6 @@ font pango:DEC Terminal 10
 # -------------------------------------------
 for_window [class="^.*"] border pixel 0
 for_window [class="Pinentry"] floating enable
-for_window [class="SPEEDREADER"] floating enable
 
 # -------------------------------------------
 set $sceenshot '$HOME/.screenshots/%Y-%m-%d-%H-%M-%S-$w-x-$h.png'
@@ -48,20 +47,16 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg e
 bindsym $mod+shift+x exec i3lock -i ~/.config/i3/bg-blur.png
 
 # -------------------------------------------
-# TODO: Media keys no work
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-# Keyboard Backlight
-# TODO: /sys/class/leds/smc::kbd_backlight/brightness
-# bindsym XF86KbdBrightnessUp 
-# bindsym XF86KbdBrightnessDown 
 
 # -------------------------------------------
 mode "resize" {
@@ -75,46 +70,30 @@ mode "resize" {
 bindsym $mod+Shift+w mode "resize"
 
 # -------------------------------------------
-set $ws1 "1:L1"
-set $ws2 "2:L2"
-set $ws3 "3:L3"
-
-set $ws4 "4:R1"
-set $ws5 "5:R2"
-set $ws6 "6:R3"
+set $ws1 "1:Alp"
+set $ws2 "2:Bra"
+set $ws3 "3:Cha"
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
 
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
 
-workspace $ws1 output HDMI2
-workspace $ws2 output HDMI2
-workspace $ws3 output HDMI2
-
-workspace $ws4 output DP1
-workspace $ws5 output DP1
-workspace $ws6 output DP1
-
-
+workspace $ws1 output DP2
+workspace $ws2 output DP2
+workspace $ws3 output DP2
 
 # -------------------------------------------
 bar {
         tray_output primary
-	tray_padding 5 px
+        tray_padding 5 px
 
         position top
 
-        status_command goblocks
+        status_command /cloud/bin/goblocks
         mode dock
         workspace_buttons yes
         strip_workspace_numbers yes
