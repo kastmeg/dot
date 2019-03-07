@@ -161,29 +161,29 @@ PURE_GIT_PULL=0
 IMPURE_PROMPT_SSH_SYMBOL=""
 IMPURE_PROMPT_DOCKER_SYMBOL=" "
 # IMPURE_READ_ONLY_PATH_SYMBOL="%F{red} %f"
-#declare -A IMPURE_REPLACE_PATH=(
+declare -A IMPURE_REPLACE_PATH=(
 #	[~]="~ (%F{red}home%f)"
 #	[/]="%F{red}/%f"
 #	[/cloud]="%F{white}/cloud  %f"
 #	[/tmp]="%F{white}/tmp  %f"
 #	[/usr/local/src]="%F{yellow}/usr/local/src%f"
-#)
+)
 
 # Map value is prepended to the path if the key matches any part of the pwd
-#declare -A IMPURE_PREPEND_PATH=(
+declare -A IMPURE_PREPEND_PATH=(
 #	[bin]="%F{magenta}"
 #	[eikaas]="%F{yellow}"
 #	[code]="%F{yellow}"
-#)
+)
 
 # Map value is appended to the end of the path if the key matches any part of the pwd
-# declare -A IMPURE_APPEND_PATH=(
+ declare -A IMPURE_APPEND_PATH=(
 #	[/home/robin]="%F{green} %f"
 #	[bin]="%F{yellow} %f"
 #	[eikaas]=" %f"
 #	[code]=" %f"
 #	[.git]="%F{purple} %f"
-#)
+)
 prompt pure
 
 # Source ~/.alias
