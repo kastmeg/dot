@@ -1,5 +1,4 @@
 # vim: ft=zsh sw=4 ts=4
-# Update fpath
 fpath=(
 	"${HOME}/.zsh/completions"
 	"${HOME}/.zsh/prompts"
@@ -8,12 +7,12 @@ fpath=(
 ZCOMPDUMP="${HOME}/.cache/zsh/.zcompdump"
 
 # Debugging (You might want to turn these off)
-zmodload zsh/zprof
-#setopt SOURCE_TRACE
-#setopt WARN_CREATE_GLOBAL
-#setopt WARN_NESTED_VAR
-#setopt PRINT_EXIT_VALUE
-#setopt EVAL_LINENO
+# zmodload zsh/zprof
+# setopt SOURCE_TRACE
+# setopt WARN_CREATE_GLOBAL
+# setopt WARN_NESTED_VAR
+# setopt PRINT_EXIT_VALUE
+# setopt EVAL_LINENO
 
 # Enable ZLE
 setopt ZLE
@@ -24,15 +23,11 @@ setopt VI
 # Output hexadecimal in the standard C format of `0xFF` instead of `16#FF`
 setopt C_BASES
 
-# Notify when jobs finish
-# setopt NOTIFY
-
 # Allow Multiple pipes, sounds like something we'd like
 setopt MULTIOS
 
 # Allow comments in interactive shells
 setopt INTERACTIVE_COMMENTS
-
 setopt AUTO_NAME_DIRS
 
 # Completion behaviour options
@@ -50,7 +45,6 @@ setopt GLOB_COMPLETE
 setopt NUMERIC_GLOB_SORT
 setopt NO_CASE_GLOB
 setopt EXTENDEDGLOB
-
 
 # History options
 HISTFILE="${XDG_DATA_HOME}/zsh/.zsh_history"
@@ -102,10 +96,10 @@ export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 export DEBUG_SSH_AUTH_SOCKET="$(gpgconf --list-dirs agent-extra-socket)"
 
 # Enable fzf (pacman -S fzf)
-if [[ -d "/usr/share/fzf" ]]; then
+[[ -r /usr/share/fzf/key-bindings.zsh ]] && \
 	source "/usr/share/fzf/key-bindings.zsh"
+[[ -r "/usr/share/fzf/completion.zsh" ]] && \
 	source "/usr/share/fzf/completion.zsh"
-fi
 
 bindkey -v
 bindkey '^e' end-of-line
@@ -155,54 +149,45 @@ autoload -Uz promptinit; promptinit
 
 # Thanks to Sindre Sorhus for the great pure-prompt
 # https://github.com/sindresorhus/pure
-PURE_CMD_MAX_EXEC_TIME=1 # 5
-PURE_PROMPT_SYMBOL=""
-PURE_PROMPT_VICMD_SYMBOL="ᝰ "
-IMPURE_REMOTE_SYMBOL=""
-IMPORE_DOCKER_SYMBOL=" "
 # PURE_GIT_UNTRACKED_DIRTY=0
 # PURE_GIT_DELAY_DIRTY_CHECK=1800
-# PURE_GIT_DOWN_ARROW="⇣"
-# PURE_GIT_UP_ARROW="⇡"
-PURE_GIT_PULL=1
-IMPURE_CLUTTER_POOP=1
+PURE_GIT_DOWN_ARROW="⇣"
+PURE_GIT_UP_ARROW="⇡"
+PURE_CMD_MAX_EXEC_TIME=1
+PURE_PROMPT_SYMBOL=""
+PURE_PROMPT_VICMD_SYMBOL="ᝰ "
+PURE_GIT_PULL=0
 
-# Adds a "permission denied" symbol to the path if its read-only to the user
-IMPURE_READ_ONLY_PATH_SYMBOL="%F{red} %f"
-
-# Path is replaced with the map value of the key matches the pwd exactly
-declare -A IMPURE_REPLACE_PATH=(
-	[~]="%F{green}  ~"
-	[/]="%F{red}/%f"
-	[/cloud]="%F{white}/cloud  %f"
-	[/tmp]="%F{white}/tmp  %f"
-	[/usr/local/src]="%F{yellow}/usr/local/src%f"
-)
+IMPURE_PROMPT_SSH_SYMBOL=""
+IMPURE_PROMPT_DOCKER_SYMBOL=" "
+# IMPURE_READ_ONLY_PATH_SYMBOL="%F{red} %f"
+#declare -A IMPURE_REPLACE_PATH=(
+#	[~]="~ (%F{red}home%f)"
+#	[/]="%F{red}/%f"
+#	[/cloud]="%F{white}/cloud  %f"
+#	[/tmp]="%F{white}/tmp  %f"
+#	[/usr/local/src]="%F{yellow}/usr/local/src%f"
+#)
 
 # Map value is prepended to the path if the key matches any part of the pwd
-declare -A IMPURE_PREPEND_PATH=(
-	[bin]="%F{magenta}"
-	[eikaas]="%F{yellow}"
-	[code]="%F{yellow}"
-)
+#declare -A IMPURE_PREPEND_PATH=(
+#	[bin]="%F{magenta}"
+#	[eikaas]="%F{yellow}"
+#	[code]="%F{yellow}"
+#)
 
 # Map value is appended to the end of the path if the key matches any part of the pwd
-declare -A IMPURE_APPEND_PATH=(
-	[/home/robin]="%F{green} %f"
-	[bin]="%F{yellow} %f"
-	[eikaas]=" %f"
-	[code]=" %f"
-	[.git]="%F{purple} %f"
-)
+# declare -A IMPURE_APPEND_PATH=(
+#	[/home/robin]="%F{green} %f"
+#	[bin]="%F{yellow} %f"
+#	[eikaas]=" %f"
+#	[code]=" %f"
+#	[.git]="%F{purple} %f"
+#)
 prompt pure
 
 # Source ~/.alias
 [[ -r "${HOME}/.alias" ]] && source "${HOME}/.alias"
-
-# Test
-setopt auto_name_dirs
-setopt auto_list
-setopt auto_menu
 
 # No delay for normal mode
 KEYTIMEOUT=1
@@ -219,12 +204,11 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+
 export BROWSER=firefox
 export EDITOR=vim
 export SYSTEMD_EDITOR=vim
-# export PAGER=less
 export PAGER=nvimpager
 export MANPAGER=nvimpager
 export TERMINAL=xfce4-terminal
-
 
