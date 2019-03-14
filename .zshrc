@@ -47,7 +47,7 @@ setopt NO_CASE_GLOB
 setopt EXTENDEDGLOB
 
 # History options
-HISTFILE="${XDG_DATA_HOME}/zsh/.zsh_history"
+HISTFILE="${XDG_DATA_HOME:-~/.local/share}/zsh/.zsh_history"
 HISTSIZE=15000
 SAVEHIST=15000
 # Don't overwrite, append
