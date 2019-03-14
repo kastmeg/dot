@@ -1,7 +1,9 @@
-.PHONY: install uninstall
-install:
-	stow -vs --target=${HOME} --ignore="(README.md|Makefile|.gitignore)" .
+TARGET := ${HOME}
 
-uninstall:
-	stow vD --target=${HOME} .
+.PHONY: stow unstow
+stow:
+	stow -vS --target=${TARGET} --ignore="(README.md|Makefile|.gitignore)" .
+
+unstow:
+	stow -vD --target=${TARGET} .
 
