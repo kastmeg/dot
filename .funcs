@@ -163,3 +163,4 @@ boxelm() {
 	 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 	EOF
 }
+tm() { [[ -z $TMUX ]] && tmux new -A -s "${SYM_HEART}"; }
