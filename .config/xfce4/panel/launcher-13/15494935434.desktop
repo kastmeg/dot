@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Electron
+Icon=electron
+Exec=electron %u
+Categories=Development;GTK;
+StartupNotify=true
+X-XFCE-Source=file:///usr/share/applications/electron.desktop
