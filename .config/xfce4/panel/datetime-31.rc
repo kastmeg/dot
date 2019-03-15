@@ -1,0 +1,6 @@
+layout=2
+date_font=DEC Terminal 12
+time_font=DEC Terminal 10
+date_format=%a, %d %b %Y [%W] | %H:%M:%S
+time_format=%A | %d %b %Y | week %W | %H:%M:%S | %ss
+

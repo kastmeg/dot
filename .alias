@@ -1,0 +1,53 @@
+# vim: ft=zsh 
+
+# Override default commands
+alias less="less --RAW-CONTROL-CHARS"
+alias tree="tree -C -L 3"
+alias ls="exa -gh --git --binary --color-scale"
+alias cp='cp -v'
+alias mv='mv -v'
+alias rm='rm -v'
+alias figlet='figlet -w 300 -f univers'
+alias routes="ip route show"
+alias tc="tc -color -pretty"
+alias ip="ip -color -pretty"
+alias ssh="TERM=xterm-256color ssh"
+alias scp="TERM=xterm-256color scp"
+
+# git aliases
+alias gitpush='git push origin master'
+alias gd='git diff --color --no-ext-diff'
+alias gdlast='git diff --color --no-ext-diff @~..@'
+alias gdlastfew='git diff --color --no-ext-diff'
+alias gdw='git diff --color --no-ext-diff --word-diff'
+alias gdstat='git diff --color --stat'
+alias gs='git status -sb'
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gitbranches="git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+alias gcpush='git commit -a -m && git push origin'
+alias gupdatesubm='pull --recurse-submodules && git submodule update --recursive --remote'
+alias gundo='git reset --soft HEAD~1'
+
+# Misc 
+wifi_list="nmcli device wifi rescan; nmcli -p -f all device wifi list"
+alias genpw="base64 <(cat /dev/urandom | head -c 16) | tr -d '=' | tr -d '/'"
+alias ymlchk="python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' 2>/dev/null < $1"
+alias plotline="gnuplot -p -e 'plot \"/dev/stdin\"'"
+alias get="curl -sSLfO ${@}"
+alias c="cd /cloud/code"
+alias qr="qrencode -tANSIUTF8"
+alias sanekeys="setxkbmap -model thinkpad -layout us -variant altgr-intl"
+alias o="xdg-open"
+alias open="xdg-open"
+alias n="cd /cloud/notes"
+alias hx='hexump -Cv'
+alias cpkey="gpg --export-ssh-key Robin | xclip"
+alias xp="xclip"
+alias pwed="pass edit $1"
+alias pwclip="pass show --clip $1"
+alias pwqr="pass show --qrcode $1"
+alias ipshow="ip -4 -brief address show; ip -6 -brief address show"
+alias docker-aur-build="docker run -v $PWD:/pkg docker-aur-builder"
+alias doctl-ls='doctl compute droplet list --format "Name,Image,PublicIPv4,Memory,VCPUs,Disk,Region"'
+alias todo="vim ~/todo.txt"
+alias tn="tmux new-window"

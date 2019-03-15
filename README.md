@@ -7,29 +7,22 @@
             ▄█▀         ██
            ▄█▀          ▀▀
 ```
-# My (slightly bugged) dotfiles
 
-## Install
+Dotfiles
+========
+
+## GNU Stow
+The Makefile contains stow-commands to enable/disable the config files.
 ```bash
-git clone https://github.com/eikaas/dotfiles ~/.dotfiles && cd ~/.dotfiles 
-make install
+# Create symlinks in $HOME
+make stow
+
+# Remove symlinks
+make unstow
 ```
 
-## Docker
-The provided Dockerfile creates an archlinux image with the dotfiles installed & configured. A great way to test the config without messing up any existing environment
-
+You can override the stow target by passing `-e TARGET=/tmp/some/path` to the make command
 ```bash
-make image
-make run
+make -e TARGET=/home/foousr install
 ```
 
-## Misc.
-### Ligatures
-The following AUR-packages were installed to get ligatures to display correctly.
-* termite-git
-* termite-terminfo-git
-
-### Bugs
-* base16 not working
-* zplug won't install the required plugins at build time. This leads to sweat, duckt-tape and feces dominating the Makefile unfortunately
-* And probably a whole lot more at the moment

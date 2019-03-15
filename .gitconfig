@@ -17,5 +17,5 @@
 	user = eikaas
 [gist]
 	private = yes
-[commit]
-	gpgsign = true
+#[commit]
+#	gpgsign = true

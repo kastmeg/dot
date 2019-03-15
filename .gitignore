@@ -1,1 +1,5 @@
 .config/zsh/.zcompdump*
+*.net*
+.config/gtk-3.0/bookmarks
+.zshenv
+nb.utf-8.add

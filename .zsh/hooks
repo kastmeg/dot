@@ -1,0 +1,24 @@
+# zsh hooks are functions that, if defined, will be run by zsh at
+# the various times indicated.
+#
+# The man page zshmisc has more information
+# 
+# Do something interesting with them
+
+# chpwd is run every time the directory changes
+#chpwd() { ; }
+
+# precmd is run before the prompt is drawn
+#precmd() { ; }
+
+# preexec is executed after the command is read and right
+# before it is executed.
+#preexec() { ; }
+
+# zshaddhistory is executed when a history line 
+# has been read interactively, but before it is executed.
+# The sole argument is the complete history line 
+#zshaddhistory() { ; }
+
+# runs every x, where x must be defined in <dont-remember-check-zshmisc-manpage>
+#periodic() { ; }
