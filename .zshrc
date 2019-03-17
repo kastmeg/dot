@@ -1,9 +1,11 @@
 # vim: ft=zsh sw=4 ts=4
+
 fpath=(
 	"${HOME}/.zsh/completions"
 	"${HOME}/.zsh/prompts"
 	$fpath
 )
+
 ZCOMPDUMP="${HOME}/.cache/zsh/.zcompdump"
 
 # Debugging (You might want to turn these off)
@@ -46,40 +48,45 @@ setopt NUMERIC_GLOB_SORT
 setopt NO_CASE_GLOB
 setopt EXTENDEDGLOB
 
-# History options
-HISTFILE="${XDG_DATA_HOME:-~/.local/share}/zsh/.zsh_history"
-HISTSIZE=15000
-SAVEHIST=15000
-# Don't overwrite, append
-setopt APPENDHISTORY
 
-# Write history after every command
-setopt INC_APPEND_HISTORY
+## History wrapper
+function omz_history {
+  local clear list
+  zparseopts -E c=clear l=list
 
-# Share history between shells
-setopt SHARE_HISTORY
+  if [[ -n "$clear" ]]; then
+    # if -c provided, clobber the history file
+    echo -n >| "$HISTFILE"
+    echo >&2 History file deleted. Reload the session to see its effects.
+  elif [[ -n "$list" ]]; then
+    # if -l provided, run as if calling `fc' directly
+    builtin fc "$@"
+  else
+    # unless a number is provided, show all history events (starting from 1)
+    [[ ${@[-1]} = *[0-9]* ]] && builtin fc -l "$@" || builtin fc -l "$@" 1
+  fi
+}
 
-# Ignore repeating commands
-setopt HIST_IGNORE_DUPS
+# Timestamp format
+case $HIST_STAMPS in
+  "mm/dd/yyyy") alias history='omz_history -f' ;;
+  "dd.mm.yyyy") alias history='omz_history -E' ;;
+  "yyyy-mm-dd") alias history='omz_history -i' ;;
+  "") alias history='omz_history' ;;
+  *) alias history="omz_history -t '$HIST_STAMPS'" ;;
+esac
 
-# ... even if there are a few commands in between the dupes
-setopt HIST_IGNORE_ALL_DUPS
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=10000
 
-# Reduce blanks,       its nice
-setopt HIST_REDUCE_BLANKS
-
-# Don't log lines starting with space
-setopt HIST_IGNORE_SPACE
-# Not sure what this does, but its present on the box where my history is working
-setopt HIST_NO_STORE
-
-# Save the time and duratoin of commands
-setopt EXTENDED_HISTORY
-
-# Dont save duplicate hitoric entries
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt inc_append_history     # add commands to HISTFILE in order of execution
+setopt share_history          # share command history data
 
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*' list-separator 'fREW'
@@ -93,7 +100,6 @@ unsetopt AUTOCD
 
 # Using gpg as ssh agent
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-export DEBUG_SSH_AUTH_SOCKET="$(gpgconf --list-dirs agent-extra-socket)"
 
 # Enable fzf (pacman -S fzf)
 [[ -r /usr/share/fzf/key-bindings.zsh ]] && \
@@ -208,7 +214,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export BROWSER=firefox
 export EDITOR=vim
 export SYSTEMD_EDITOR=vim
-export PAGER=nvimpager
-export MANPAGER=nvimpager
+export PAGER=less
+export MANPAGER=less
 export TERMINAL=xfce4-terminal
 
