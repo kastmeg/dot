@@ -1,116 +1,73 @@
-if exists('$XDG_DATA_HOME')
-    let nvim_data_dir=expand('$XDG_DATA_HOME' . '/nvim')
-else
-    let nvim_data_dir=expand('~/.local/share/nvim')
-endif
+runtime functions.vim
 
-let nvim_plugdir=expand(nvim_data_dir . '/plugged')
-let vimplug=expand(nvim_data_dir . '/autoload/plug.vim')
-
-if !filereadable(vimplug)
-  echo 'Installing junegunn/vim-plug...'
-  silent !\curl -SLfo ~/.local/share/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  echo 'Installing plugins...'
-  autocmd VimEnter * PlugInstall
-endif
-
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      !cargo build --release
-    else
-      !cargo build --release --no-default-features --features json-rpc
-    endif
-  endif
-endfunction
-
-" Loading plugins.
-call plug#begin(nvim_plugdir)
+let must = EnsureVimPlug(expand('~/.local/share/nvim/site/autoload/plug.vim'))
+call plug#begin(expand('~/.local/share/nvim/plugged'))
 Plug 'neomake/neomake'
-Plug 'fidian/hexmode'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-sleuth'
-Plug 'vim-scripts/mru.vim'
-Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'vim-scripts/bufexplorer.zip'
-Plug 'amix/open_file_under_cursor.vim'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'Nequo/vim-allomancer'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do':  nvim_plugdir . '/gocode/nvim/install.sh' }
-Plug 'pearofducks/ansible-vim'
-Plug 'junegunn/goyo.vim'
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'w0rp/ale'
-Plug 'ternjs/tern_for_vim'
-Plug 'cespare/vim-toml'
 Plug 'freitass/todo.txt-vim'
-Plug 'SirVer/ultisnips'
-
-"Plug 'chriskempson/base16-vim'
-"Plug 'vim-scripts/grep.vim'
-"Plug 'vim-scripts/CSApprox'
-"Plug 'majutsushi/tagbar'
-"Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-"Plug 'xolox/vim-misc'
-"Plug 'xolox/vim-session'
-"Plug 'Shougo/vimshell.vim'
-"Plug 'hail2u/vim-css3-syntax'
-"Plug 'gorodinskiy/vim-coloresque'
-"Plug 'tpope/vim-haml'
-"Plug 'mattn/emmet-vim'
-"Plug 'arnaud-lb/vim-php-namespace'
-"Plug 'jelera/vim-javascript-syntax'
-
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+"Plug 'mdempsky/gocode', { 'rtp': 'vim', 'do':  '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
+"Plug 'fidian/hexmode'
 call plug#end()
+"call PlugInstallIf(must)
 
-filetype plugin indent on
+" colorscheme allomancer   " Set the colorscheme
 
-set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8
-set noerrorbells
-set rnu
-set nowrap
-set number
-set completeopt=longest,menuone
-set scrolloff=8
-set fileformats=unix,dos,mac
-set clipboard^=unnamedplus
-set showmatch
-set ignorecase
+set relativenumber  " Use relative line numbers
+set nowrap          " dont wrap lines
+set scrolloff=16    " Scroll when cursor is this many lines from the window edge
+set showmatch       " show matching brackets
+set ignorecase      " Be smart about ignoring case in patterns
 set smartcase
-set smartindent
-set lazyredraw
-set autowrite
-set laststatus=2
-set expandtab
-set smarttab
-set shiftwidth=4
-set tabstop=4
-set hidden
-set modeline
-set modelines=10
-set title
-set titlestring=%F
+set smartindent     " Smart autoindenting when starting new lines
+set lazyredraw      " Makes vim not redraw while executing macros
+set noexpandtab     " Dont expand tabs with spaces
+set tabstop=8       " The number of spaces a <tab> is shown as
+set shiftwidth=8    " shiftwidth should match tabstop
+set laststatus=2    " always show status line
+
+" Enable the bottom right cursor information and set its format+color
+set ruler
+set rulerformat=%25(%c\x%l\ 0x%O\ %1*\[0x%B\]%0*%) 
+hi User1 ctermfg=Black ctermbg=Red
+
+" Set the status line
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
+" Display a symbol for trailing whitespace and <tab>'s
+set list
+set listchars=tab:→\ ,trail:⌁
+highlight ExtraWhitespace ctermfg=11
+match ExtraWhitespace /\s\+$/
+
+" Recolor the vertical split
+hi VertSplit ctermbg=bg ctermfg=11
+
+" Change the vertical split symbol
+set fillchars+=vert:\╵
+
+" Let <space> be the <leader> key
 let mapleader = " "
+
+" Move between window splits
 nnoremap <leader>h <C-w>h<cr>
 nnoremap <leader>j <C-w>j<cr>
 nnoremap <leader>k <C-w>k<cr>
 nnoremap <leader>l <C-w>l<cr>
-nnoremap <leader><enter> <C-w><C-v><C-l>:terminal<cr>
+
+" open vim config
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+" source vim config
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" jump to the next error
 nnoremap <C-e> :cnext<cr>
-nnoremap <C-m> :cprevious<cr>
+
+" close error window
 nnoremap <leader>e :cclose<cr>
 
+" Open current file in vscode
 command! OpenInVSCode exe "silent !code --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" | redraw!
 
 " Disable arrow keys
@@ -119,28 +76,7 @@ nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
 
-nnoremap <C-up> :tabnew<cr>
-nnoremap <C-right> :tabNext<cr>
-nnoremap <C-left> :tabPrevious<cr>
-nnoremap <C-down> :tabclose<cr>
-nnoremap <leader>ss :%s/\<<C-r><C-w>\>/
-nnoremap <leader>w :w!<cr>
-nnoremap <leader>wq :wq!<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>f :Goyo<cr>
-nnoremap <leader>o :BufExplorer<cr>
-nnoremap <leader>f :MRU<cr>
-
-"" Git
-noremap <Leader>ga :Gwrite<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
-noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
-noremap <Leader>gr :Gremove<CR>
-
+" fixes some annoyances
 command! Q q
 command! W w
 cnoreabbrev W! w!
@@ -154,68 +90,16 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
-nmap <leader>e :exec '!'.getline('.')<cr>
-nmap <leader>r :w<cr>:!chmod +x % && ./% <cr>
+autocmd BufNewFile,BufRead *.html setlocal noexpandtab tabstop=2 shiftwidth=2
+autocmd BufNewFile,BufRead *.vim setlocal expandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.yml setlocal expandtab tabstop=2 shiftwidth=2
+autocmd BufNewFile,BufRead *.sh setlocal expandtab tabstop=4 shiftwidth=4
+autocmd BufNewFile,BufRead *.xkb setlocal expandtab tabstop=2 shiftwidth=2 ft=xkb
 
-" Manually open the browser if needed instead
-let g:markdown_composer_open_browser=0
-nnoremap <leader>m :ComposerOpen<cr>
-
-" Spell checking
-set spell spelllang=en_us
-highlight clear SpellBad cterm
-highlight SpellBad ctermbg=NONE ctermfg=167 cterm=underline
-setlocal spelllang=en_us
-set nospell
-autocmd FileType gitcommit setlocal spell complete+=kspell
-autocmd BufNewFile,BufRead *.md setlocal spell complete+=kspell
-autocmd BufNewFile,BufRead *.txt setlocal spell complete+=kspell
-autocmd BufNewFile,BufRead *.markdown setlocal spell complete+=kspell
-autocmd BufNewFile,BufRead *.markdown Goyo
-autocmd BufNewFile,BufRead *.md Goyo
-
-" HTML / Javascript
-autocmd Filetype html setlocal ts=2 sw=2 expandtab
-let g:javascript_enable_domhtmlcss = 1
-augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
-augroup END
-
-" Copy/Paste/Cut
-if has('unnamedplus')
-  set clipboard=unnamed,unnamedplus
-endif
-
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-
-" UltiSnip
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsEditSplit="vertical"
-
-" GitGutter
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '~'
-let g:gitgutter_sign_removed = '-'
-let g:gitgutter_sign_modified_removed = '¿'
-let g:gitgutter_realtime = 1
-let g:gitgutter_eager = 0
-let g:gitgutter_map_keys = 0
-if exists('&signcolumn')
-  set signcolumn=yes
-else
-  let g:gitgutter_sign_column_always = 1
-endif
-
-" Neomake / Deoplete
+" configure neomake/deoplete
 call neomake#configure#automake('w')
 call neomake#configure#automake('nw', 100)
 call neomake#configure#automake('rw', 100)
-
 let g:deoplete#enable_at_startup = 1
 let g:polyglot_disabled = ['go']
 let g:neomake_go_enabled_makers = ['go', 'golint']
@@ -225,11 +109,8 @@ let g:neomake_warning_sign = {'text': 'w', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_exit = 1
 
-" Set filetype to nginx for .conf files in the right directories
-autocmd BufRead,BufNewFile
-	\ /etc/nginx/*,/usr/local/nginx/*,/opt/nginx/*
-	\ if &ft == 'conf' || &ft == '' |
-	\ set filetype=nginx | endif
+set omnifunc=syntaxcomplete#Complete
+set completeopt=longest,menuone
 
 " Go
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
@@ -273,13 +154,7 @@ augroup go
   au FileType go imap <C-g> <esc>:<C-u>GoDecls<cr>
   au FileType go imap <leader>dr <esc>:<C-u>GoDeclsDir<cr>
   au FileType go nmap <leader>rb :<C-u>call <SID>build_go_files()<CR>
-
 augroup END
-
-let g:hexmode_patterns = '*.bin,*.exe,*.dat,*.o'
-
-set omnifunc=syntaxcomplete#Complete
-set completeopt=longest,menuone
 
 " Open help in a vertical split instead
 command! -nargs=* -complete=help Help vertical belowright help <args>
@@ -297,27 +172,6 @@ if has('persistent_undo')
   set undodir=~/.local/share/nvim/undo//
 endif
 
-" Goyo
-let g:goyo_width = 80
-let g:goyo_height = 90
-let g:goyo_linenr = 0
-
-" colorscheme / Estheticcs
-colorscheme allomancer
-hi VertSplit ctermbg=bg ctermfg=11
-set fillchars+=vert:\╵
-
-if &diff
-  highlight LineNr ctermfg=238 ctermbg=black
-  highlight Cursorlinenr ctermfg=95 ctermbg=NONE
-  highlight cursorline ctermfg=95 ctermbg=NONE
- set cursorline
-endif
-set listchars=tab:→\ ,trail:⌁
-set list
-highlight ExtraWhitespace ctermfg=11
-match ExtraWhitespace /\s\+$/
-
 " Airline
 let g:airline_theme = 'minimalist'
 let g:airline_powerline_fonts = 1
@@ -326,29 +180,30 @@ let g:airline#extensions#tabline#enabled = 1
 let NVIM_TUI_ENABLE_TRUE_COLOR=1
 let NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-" Spell Checking
+" git-gutter configuration
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '~'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_modified_removed = '¿'
+let g:gitgutter_realtime = 1
+let g:gitgutter_eager = 0
+let g:gitgutter_map_keys = 0
+if exists('&signcolumn')
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
+
+" Spellcheck config
 highlight clear SpellBad cterm
 highlight SpellBad ctermbg=NONE ctermfg=167 cterm=underline
 setlocal spelllang=en_us
+" disable spellcheck by default
 set nospell
-
-" filetype overrides:
+" .. and enable it based on the file type instead
 autocmd FileType gitcommit setlocal spell complete+=kspell
 autocmd BufNewFile,BufRead *.md setlocal spell complete+=kspell
 autocmd BufNewFile,BufRead *.txt setlocal spell complete+=kspell
 autocmd BufNewFile,BufRead *.markdown setlocal spell complete+=kspell
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-autocmd BufNewFile,BufRead *.html setlocal noexpandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.vim setlocal expandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.yml setlocal expandtab tabstop=2 shiftwidth=2
-autocmd BufNewFile,BufRead *.sh setlocal expandtab tabstop=4 shiftwidth=4
-autocmd BufNewFile,BufRead *.xkb setlocal expandtab tabstop=2 shiftwidth=2 ft=xkb
 
-" vimdiff
-if &diff 
-  highlight LineNr ctermfg=238 ctermbg=black
-  highlight Cursorlinenr ctermfg=95 ctermbg=NONE
-  highlight cursorline ctermfg=95 ctermbg=NONE
- set cursorline
-endif
 
