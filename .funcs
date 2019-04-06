@@ -164,3 +164,7 @@ boxelm() {
 	EOF
 }
 tm() { [[ -z $TMUX ]] && tmux new -A -s "${SYM_HEART}"; }
+
+fontlist() { 
+	fc-list | awk '{$1=""}1' | cut -d: -f1 | sort| uniq
+}
