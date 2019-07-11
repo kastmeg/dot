@@ -15,6 +15,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'stevearc/vim-arduino'
 Plug 'sudar/vim-arduino-syntax'
+Plug 'cakebaker/scss-syntax.vim'
 "Plug 'airblade/vim-gitgutter'
 call plug#end()
 call PlugInstallIf(must)
@@ -54,6 +55,8 @@ set fillchars+=vert:\╵
 " Let <space> be the <leader> key
 let mapleader = " "
 
+nnoremap <leader>r :GoRun<cr>
+
 " Move between window splits
 nnoremap <leader>h <C-w>h<cr>
 nnoremap <leader>j <C-w>j<cr>
@@ -89,6 +92,8 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " jump to the next error
 nnoremap <C-e> :cnext<cr>
 
+nnoremap <leader>er oif err != nil {<cr> return err<cr>}<cr>
+
 " Open current file in vscode
 command! OpenInVSCode exe "silent !code --goto '" . expand("%") . ":" . line(".") . ":" . col(".") . "'" | redraw!
 
@@ -118,6 +123,7 @@ autocmd BufNewFile,BufRead *.vim setlocal expandtab tabstop=4 shiftwidth=4
 autocmd BufNewFile,BufRead *.yml setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufNewFile,BufRead *.sh setlocal expandtab tabstop=4 shiftwidth=4
 autocmd BufNewFile,BufRead *.xkb setlocal expandtab tabstop=2 shiftwidth=2 ft=xkb
+autocmd BufNewFile,BufRead *.scss setlocal noexpandtab tabstop=4 shiftwidth=4 
 
 " configure neomake/deoplete
 silent! call neomake#configure#automake('w')
@@ -171,7 +177,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_type_info = 1
-let g:go_metalinter_autosave = 1
+let g:go_metalinter_command = "golangci-lint"
+let g:go_metalinter_autosave =  1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_space_tab_error = 1
 let g:go_highlight_array_whitespace_error = 1
@@ -196,7 +203,7 @@ augroup go
   au FileType go nnoremap <leader>dv <Plug>(go-doc-vertical)
   au FileType go nnoremap <leader>db <Plug>(go-doc-browser)
   au FileType go nnoremap <leader>r <Plug>(go-run)
-  au FileType go nnoremap <leader>t <Plug>(go-test)
+  au FileType go nnoremap <leader>gt <Plug>(go-test)
   au FileType go nnoremap <leader>gt <Plug>(go-coverage-toggle)
   au FileType go nnoremap silent <leader>l <Plug>(go-metalinter)
   "au FileType go nmap <C-g> :GoDecls<cr>

@@ -36,17 +36,20 @@ setopt AUTO_NAME_DIRS
 setopt BASH_AUTO_LIST
 setopt CHASE_DOTS
 setopt CHASE_LINKS
-setopt COMPLETE_IN_WORD
+#setopt COMPLETE_IN_WORD
 setopt ALWAYS_TO_END
 setopt MAGIC_EQUAL_SUBST
 setopt MULTIBYTE
 setopt NUMERIC_GLOB_SORT
 
+
 # Globbing options
-setopt GLOB_COMPLETE
+#setopt GLOB_COMPLETE
 setopt NUMERIC_GLOB_SORT
-setopt NO_CASE_GLOB
+#setopt NO_CASE_GLOB
 setopt EXTENDEDGLOB
+
+setopt AUTO_PUSHD
 
 ## History wrapper
 function omz_history {
@@ -118,6 +121,8 @@ bindkey -M vicmd "q" push-line
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M vicmd 'u' undo
 
+# bindkey '^p'
+
 # commandline completion
 if hash pandoc 2>/dev/null; then
 	eval $(pandoc --bash-completion)
@@ -156,9 +161,9 @@ autoload -Uz promptinit; promptinit
 PURE_GIT_DOWN_ARROW="⇣"
 PURE_GIT_UP_ARROW="⇡"
 PURE_CMD_MAX_EXEC_TIME=5
-PURE_PROMPT_SYMBOL=""
+PURE_PROMPT_SYMBOL="⚶ "
 PURE_PROMPT_VICMD_SYMBOL=""
-#PURE_GIT_PULL=0
+PURE_GIT_PULL=0
 prompt pure
 
 # Source ~/.alias
