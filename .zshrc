@@ -190,5 +190,5 @@ export EDITOR=vim
 export SYSTEMD_EDITOR=vim
 export PAGER=less
 export MANPAGER=less
-export TERMINAL=xfce4-terminal
 
+source ~/.base16_theme

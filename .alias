@@ -9,8 +9,8 @@ alias mv='mv -v'
 alias rm='rm -v'
 alias figlet='figlet -w 300 -f univers'
 alias routes="ip route show"
-alias tc="tc -color -pretty"
-alias ip="ip -color -pretty"
+#alias tc="tc -color -pretty"
+#alias ip="ip -color -pretty"
 alias ssh="TERM=xterm-256color ssh"
 alias scp="TERM=xterm-256color scp"
 
@@ -34,7 +34,7 @@ alias genpw="base64 <(cat /dev/urandom | head -c 16) | tr -d '=' | tr -d '/'"
 alias ymlchk="python -c 'import yaml,sys;yaml.safe_load(sys.stdin)' 2>/dev/null < $1"
 alias plotline="gnuplot -p -e 'plot \"/dev/stdin\"'"
 alias get="curl -sSLfO ${@}"
-alias c="cd /cloud/code"
+alias c="cd ~/go/src/github.com/eikaas"
 alias qr="qrencode -tANSIUTF8"
 alias sanekeys="setxkbmap -model thinkpad -layout us -variant altgr-intl"
 alias o="xdg-open"
@@ -69,3 +69,5 @@ alias 7="cd ~7"
 alias 8="cd ~8"
 alias 9="cd ~9"
 alias jtc="jotta-cli"
+
+alias wmi="cd $GOPATH/src/github.com/martinlindhe/wmi_exporter"

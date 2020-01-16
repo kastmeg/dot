@@ -1,6 +1,6 @@
 [user]
-	name = Robin Eikaas
-	email = robin@eika.as
+	name = Eikaas, Robin
+	email = Robin.Eikaas@skatteetaten.no
 	signingkey = 0x061EDBCFD08647ED
 [core]
 	pager = less
