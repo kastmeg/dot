@@ -71,3 +71,17 @@ alias 9="cd ~9"
 alias jtc="jotta-cli"
 
 alias wmi="cd $GOPATH/src/github.com/martinlindhe/wmi_exporter"
+
+gtz() {
+	url="http://localhost:8008"
+	method="$1"; shift
+
+	for uri in $@; do
+
+		echo -ne "\n=> \e[38;5;159m${method} \e[38;5;38m${url}\e[38;5;196m${uri}\e[0m\n"
+		echo -ne "\e[38;5;118m"
+		curl -X $method -sSLI "${url}${uri}"
+		echo -ne "\e[0m"
+		curl -sSL -X $method "${url}${uri}" | jq
+	done
+}
